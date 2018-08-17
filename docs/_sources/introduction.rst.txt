@@ -19,7 +19,7 @@ A typical computer network has several access points to other networks, both pub
 
 .. image:: /images/diagram-what-is-idp.png
    :alt: What is IDS?
-   :scale: 100%
+   :scale: 60%
  
 
 What Can You Do with IDS?
