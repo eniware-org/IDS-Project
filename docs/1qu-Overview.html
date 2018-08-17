@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Overview &mdash; IDS Project Documentation 1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Flashing Routing Firmware" href="2qu-FlashingFirmware.html" />
+    <link rel="prev" title="Quanta LB4M Switch Setup" href="quanta.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> IDS Project Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="quanta.html">Quanta LB4M Switch Setup</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#switch-description">Switch Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#front-panel-components">Front-Panel Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rear-panel-description">Rear Panel Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#management-options">Management Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#web-based-management-interface">Web-based Management Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-console-interface-through-the-serial-port-or-telnet">Command Line Console Interface Through the Serial Port or Telnet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#snmp-based-management">SNMP-Based Management</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2qu-FlashingFirmware.html">Flashing Routing Firmware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3qu-SetupMirroring.html">Setup Port Mirroring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4qu-Troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ids.html">IDS</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IDS Project Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="quanta.html">Quanta LB4M Switch Setup</a> &raquo;</li>
+        
+      <li>Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/1qu-Overview.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="switch-description">
+<span id="id1"></span><h2>Switch Description<a class="headerlink" href="#switch-description" title="Permalink to this headline">¶</a></h2>
+<p>The Quanta LB4M is a modular Gigabit Ethernet backbone switch designed for adaptability and
+scalability. The Switch can utilize up to 48 Gigabit Ethernet ports to function as a central
+distribution hub for other switches, switch groups, or routers. The one built-in 1000/100/10
+Ethernet ports for out of service. The LB4M also provides SFP+ interfaces for 10-Giga port on
+the daughter board. The number of 10-Giga ports depend on selecting daughter board.</p>
+</div>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Supports 48 10/100/1000BASE-T RJ45 Ethernet ports.</li>
+<li>1 built-in 1000/100/10 Ethernet ports for out of service.</li>
+<li>Supports 802.1D STP, 802.1S MSTP, and 802.1w Rapid Spanning Tree for redundant back up bridge paths.</li>
+<li>Supports 802.1Q VLAN, Protocol-based VLAN, Subnet-based VLAN, MAC-based VLAN, Protected Port, Double VLAN, Voice VLAN, GVRP, GMRP, IGMP snooping, 802.1p Priority Queues, Port Channel, port mirroring.</li>
+<li>Support LLDP, VTP, Port Security.</li>
+<li>Multi-layer Access Control (based on MAC address, IP address, VLAN, Protocol, 802.1p, DSCP).</li>
+<li>Quality of Service (QoS) customized control.</li>
+<li>802.1x (port-based) access control and RADIUS Client support.</li>
+<li>Administrator-definable port security.</li>
+<li>Per-port bandwidth control.</li>
+<li>IEEE 802.3z and IEEE 802.3x compliant Flow Control for all Gigabit ports.</li>
+<li>SNMP v.1, v.2, v.3 network management, RMON support.</li>
+<li>Supports Web-based management.</li>
+<li>CLI management support.</li>
+<li>DHCP Client and Relay support.</li>
+<li>DNS Client and Relay support.</li>
+<li>Fully configurable either in-band or out-of-band control via RS-232 console serial connection.</li>
+<li>Telnet remote control console.</li>
+<li>TraceRoute support.</li>
+<li>Traffic Segmentation.</li>
+<li>TFTP upgrade.</li>
+<li>SysLog support.</li>
+<li>Simple Network Time Protocol.</li>
+<li>Web GUI Traffic Monitoring.</li>
+<li>SSH Secure Shell version 1 and 2 support.</li>
+<li>SSL Secure HTTP TLS Version 1 and SSL version 3 support.</li>
+<li>ARP support.</li>
+<li>IP Routing support.</li>
+<li>OSPF v2 and v3 support.</li>
+<li>RIP v1 and v2 support.</li>
+<li>Router Discovery Protocol support.</li>
+<li>VLAN routing support.</li>
+<li>Virtual Router Redundancy Protocol (VRRP) support.</li>
+<li>IP Multicast support.</li>
+<li>Protocol Independent Multicast - Dense Mode (PIM-DM) support.</li>
+<li>Protocol Independent Multicast - Sparse Mode (PIM-SM) support.</li>
+<li>IGMP v1, v2, and v3 support.</li>
+<li>DVMRP support.</li>
+<li>IPV6 function - Supports DHCPv6 protocol, OSPFv3 protocol, Tnneling, loopback. Provides to configure IPv6 rotuing interface, routing preference.</li>
+</ul>
+</div>
+<div class="section" id="front-panel-components">
+<h2>Front-Panel Components<a class="headerlink" href="#front-panel-components" title="Permalink to this headline">¶</a></h2>
+<p>The front panel of the Switch consists of 48 1-Giga interfaces, 4 LED indicators, one built-in 1000/100/10 RJ-45 Ethernet service ports, an RS-232 communication port.
+The upper LED indicators display power situation. The lower LED indicators displays the status of the switch. Two LED indicators display the status of SFP+ interface, An RS-232 DCE console port is for setting up and managing the Switch via a connection to a console terminal or
+PC using a terminal emulation program.</p>
+<a class="reference internal image-reference" href="_images/LB4M_front_panel.png"><img alt="Quanta front panel" src="_images/LB4M_front_panel.png" style="width: 1180.0px; height: 320.0px;" /></a>
+</div>
+<div class="section" id="rear-panel-description">
+<h2>Rear Panel Description<a class="headerlink" href="#rear-panel-description" title="Permalink to this headline">¶</a></h2>
+<p>The rear panel of the Switch contains an redundant AC/DC power unit and three fans.
+The redundant AC/DC power unit is a two slots for redundant, hot-swappable power supply. The norminal input voltage in the range from 100 ~ 240 VAC at 48 ~ 62 Hz. The norminal output voltage set point 12 VDC, Minimum/Maximum output current is 2 Amps ~25 Amps.</p>
+<a class="reference internal image-reference" href="_images/LB4M_rear_panel.png"><img alt="Quanta rear panel" src="_images/LB4M_rear_panel.png" style="width: 1127.0px; height: 516.0px;" /></a>
+</div>
+<div class="section" id="management-options">
+<h2>Management Options<a class="headerlink" href="#management-options" title="Permalink to this headline">¶</a></h2>
+<p>The system may be managed by using two Service Ports through a Web Browswer,Telent, SNMP Function and using the console port on the front panel through CLI command.</p>
+</div>
+<div class="section" id="web-based-management-interface">
+<h2>Web-based Management Interface<a class="headerlink" href="#web-based-management-interface" title="Permalink to this headline">¶</a></h2>
+<p>After you have successfully installed the Switch, you can configure the Switch, monitor the LED panel, and display statistics graphically using a Web browser</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To access the Switch through a Web browser, the computer running the Web browser must have IP-based network access to the Switch.</p>
+</div>
+</div>
+<div class="section" id="command-line-console-interface-through-the-serial-port-or-telnet">
+<h2>Command Line Console Interface Through the Serial Port or Telnet<a class="headerlink" href="#command-line-console-interface-through-the-serial-port-or-telnet" title="Permalink to this headline">¶</a></h2>
+<p>You can also connect a computer or terminal to the serial console port or use Telnet to access the Switch. The command-line-driven interface provides complete access to all switch management features.</p>
+</div>
+<div class="section" id="snmp-based-management">
+<h2>SNMP-Based Management<a class="headerlink" href="#snmp-based-management" title="Permalink to this headline">¶</a></h2>
+<p>You can manage the Switch with an SNMP-compatible console program. The Switch supports SNMP version 1.0, version 2.0, and version 3.0. The SNMP agent decodes the incoming SNMP messages and responds to requests with MIB objects stored in the database. The SNMP agent updates the MIB objects to generate statistics. The Switch supports acomprehensive set of MIB extensions:</p>
+<ul class="simple">
+<li><span class="target" id="index-0"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc1643.html"><strong>RFC 1643</strong></a> Ether-like MIB</li>
+<li><span class="target" id="index-1"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc1493.html"><strong>RFC 1493</strong></a> Bridge</li>
+<li><span class="target" id="index-2"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2819.html"><strong>RFC 2819</strong></a> RMON</li>
+<li><span class="target" id="index-3"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2233.html"><strong>RFC 2233</strong></a> Interface MIB</li>
+<li><span class="target" id="index-4"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2571.html"><strong>RFC 2571</strong></a> (SNMP Frameworks)</li>
+<li><span class="target" id="index-5"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2572.html"><strong>RFC 2572</strong></a> (Message Processing for SNMP)</li>
+<li><span class="target" id="index-6"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2573.html"><strong>RFC 2573</strong></a> (SNMP Applications)</li>
+<li><span class="target" id="index-7"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2576.html"><strong>RFC 2576</strong></a> (Coexistence between SNMPs)</li>
+<li><span class="target" id="index-8"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2618.html"><strong>RFC 2618</strong></a> (Radius-Auth-Client-MIB)</li>
+<li><span class="target" id="index-9"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2620.html"><strong>RFC 2620</strong></a> (Radius-Acc-Client-MIB)</li>
+<li><span class="target" id="index-10"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc1724.html"><strong>RFC 1724</strong></a> (RIPv2-MIB)</li>
+<li><span class="target" id="index-11"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc1850.html"><strong>RFC 1850</strong></a> (OSPF-MIB)</li>
+<li><span class="target" id="index-12"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc1850.html"><strong>RFC 1850</strong></a> (OSPF-TRAP-MIB)</li>
+<li><span class="target" id="index-13"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2787.html"><strong>RFC 2787</strong></a> (VRRP-MIB)</li>
+<li><span class="target" id="index-14"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc3289.html"><strong>RFC 3289</strong></a> - DIFFSERV-DSCP-TC</li>
+<li><span class="target" id="index-15"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc3289.html"><strong>RFC 3289</strong></a> - DIFFSERV-MIB</li>
+<li>QOS-DIFFSERV-EXTENSIONS-MIB</li>
+<li>QOS-DIFFSERV-PRIVATE-MIB</li>
+<li><span class="target" id="index-16"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2674.html"><strong>RFC 2674</strong></a> 802.1p</li>
+<li><span class="target" id="index-17"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2932.html"><strong>RFC 2932</strong></a> (IPMROUTE-MIB)</li>
+<li>Quanta Enterprise MIB</li>
+<li>ROUTING-MIB</li>
+<li>MGMD-MIB</li>
+<li><span class="target" id="index-18"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2934.html"><strong>RFC 2934</strong></a> PIM-MIB</li>
+<li>DVMRP-STD-MIB</li>
+<li>IANA-RTPROTO-MIB</li>
+<li>MULTICAST-MIB</li>
+<li>FASTPATH-ROUTING6-MIB</li>
+<li>IEEE8021-PAE-MIB</li>
+<li>INVENTORY-MIB</li>
+<li>MGMT-SECURITY-MIB</li>
+<li>QOS-ACL-MIB</li>
+<li>QOS-COS-MIB</li>
+<li><span class="target" id="index-19"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc1907.html"><strong>RFC 1907</strong></a> - SNMPv2-MIB</li>
+<li><span class="target" id="index-20"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2465.html"><strong>RFC 2465</strong></a> - IPV6-MIB</li>
+<li><span class="target" id="index-21"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2466.html"><strong>RFC 2466</strong></a> - IPV6-ICMP-MIB</li>
+<li>TACACS-MIB</li>
+<li>USM-TARGET-TAG-MIB</li>
+<li>IGMP/MLD Snooping</li>
+<li>IGMP/MLD Layer2 Multicast</li>
+<li>QoS – IPv6 ACL</li>
+<li>Voice VLAN</li>
+<li>Guest VLAN</li>
+<li>LLDP MED</li>
+<li><span class="target" id="index-22"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2925.html"><strong>RFC 2925</strong></a> (DISMAN-TRACEROUTE-MIB)</li>
+<li><span class="target" id="index-23"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2080.html"><strong>RFC 2080</strong></a> (RIPng)</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="2qu-FlashingFirmware.html" class="btn btn-neutral float-right" title="Flashing Routing Firmware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="quanta.html" class="btn btn-neutral" title="Quanta LB4M Switch Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, EniWARE.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
