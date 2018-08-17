@@ -86,13 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="quanta.html">Quanta LB4M Switch Setup</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="1qu-Overview.html">Overview</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Flashing Routing Firmware</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#unit-active-backup-current-active-next-active">unit      active      backup     current-active        next-active</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">unit      active      backup     current-active        next-active</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">unit      active      backup     current-active        next-active</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#unit-image1-image2-current-active-next-active">unit      image1      image2     current-active        next-active</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Flashing Routing Firmware</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3qu-SetupMirroring.html">Setup Port Mirroring</a></li>
 <li class="toctree-l2"><a class="reference internal" href="4qu-Troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -166,193 +160,244 @@
             
   <div class="section" id="flashing-routing-firmware">
 <h1>Flashing Routing Firmware<a class="headerlink" href="#flashing-routing-firmware" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>--------------------------------------------------------------------
-unit      active      backup     current-active        next-active
---------------------------------------------------------------------
-
- 1     1.1.0.8  5.13.12.14            1.1.0.8         5.13.12.14
-
-(Switching) #
-
-(Switching) #boot ?
-</pre></div>
+<p>Guide to install new firmware with CLI, confirm image, switch active boot image, turn on all ports, and finally don’t forget to “write memory”, this will set the configuration file.</p>
+<p>Use CLI with serial cable and settings on com port of <code class="docutils literal notranslate"><span class="pre">9600,8,N,1</span></code> (without any data checking).
+Hit enter a couple times, should get prompt, then use <code class="docutils literal notranslate"><span class="pre">admin</span></code> as login name default password is blank, so just enter, should get the <code class="docutils literal notranslate"><span class="pre">(Switching)&gt;</span></code> prompt then type command <code class="docutils literal notranslate"><span class="pre">enable</span></code>, will put you into command mode, password blank again.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If ever any questions on a command, or for a list of commands use the <code class="docutils literal notranslate"><span class="pre">?</span></code> symbol then enter.</p>
 </div>
-<p>!Guide to install new firmware with CLI, confirm image, switch active boot image, turn on all
-!ports, and finally don’t forget to “write memory”, this will set the configuration file.</p>
-<p>!Use CLI with serial cable and settings on com port of 9600,8,N,1 (without any data checking)
-!Hit enter a couple times, should get prompt, then
-!use “admin” as login name
-!default password is blank, so just enter, should get the (Switching)&gt; prompt
-!then type command “enable”, will put you into command mode, password blank again
-!&gt;&gt;&gt;&gt;&gt;if ever any questions on a command, or for a list of commands use the ? symbol then enter
-!&gt;&gt;&gt;&gt;&gt;FASTEST way to transfer image file (if no web page) is to use TFTP server, download a free one
-!!setup on either the machine you are using, or another on the same network, make sure to
-!!clear the TFTP program through the windows firewall, otherwise the switch won’t see it.
-!Once TFTP is ready to go, copy over the image file, and rename to something simple, I used xcode.bin</p>
-<p>!use the below command to copy from your tftp server (this one is at 10.0.5.250,
-!with root directory containing flash file “xcode.bin”)
-!&gt;&gt;&gt;&gt;&gt;&gt;one trick to making sure the unit will accept the file, is to make sure you know the names of the firmware
-!&gt;&gt;&gt;&gt;&gt;&gt;slots, use the “bootvar” command to find out what they are called.  Mine started out as
-!&gt;&gt;&gt;&gt;&gt;&gt;”active” in slot 1 and “backup” in slot 2, but after image flash and reboot to the new router firmware
-!&gt;&gt;&gt;&gt;&gt;&gt;they changed to “image1” and “image2”</p>
-<p>(Switching) #copy <a class="reference external" href="tftp://10.0.5.250/xcode.bin">tftp://10.0.5.250/xcode.bin</a> backup</p>
-<p>Mode……………………………………. TFTP
-Set Server IP……………………………. 10.0.5.250
-Path……………………………………. ./
-Filename………………………………… xcode.bin
-Data Type……………………………….. Code
-Destination Filename……………………… backup</p>
-<p>Management access will be blocked for the duration of the transfer
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">FASTEST way to transfer image file (if no web page) is to use TFTP server, download a free one setup on either the machine you are using, or another on the same network, make sure to clear the TFTP program through the windows firewall, otherwise the switch won’t see it.</p>
+</div>
+<p>Once TFTP is ready to go, copy over the image file, and rename to something simple, I used xcode.bin</p>
+<p>Use the below command to copy from your tftp server (this one is at <code class="docutils literal notranslate"><span class="pre">10.0.5.250</span></code>, with root directory containing flash file <code class="docutils literal notranslate"><span class="pre">xcode.bin</span></code>)</p>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>(Switching) #copy tftp://10.0.5.250/xcode.bin backup
+
+Mode........................................... TFTP
+Set Server IP.................................. 10.0.5.250
+Path........................................... ./
+Filename....................................... xcode.bin
+Data Type...................................... Code
+Destination Filename........................... backup
+
+Management access will be blocked for the duration of the transfer
 Are you sure you want to start? (y/n) y
 TFTP code transfer starting
-4208280 bytes transferred…
-File contents are valid. Copying file to flash…</p>
-<p>File transfer operation completed successfully.</p>
-<p>(Switching) #</p>
-<p>! Now backup image contains 5.13.12.14 Router version</p>
-<p>(Switching) #show bootvar</p>
-<p>Image Descriptions</p>
-<blockquote>
-<div><p>active : default image
-backup :</p>
-<p>Images currently available on Flash</p>
-</div></blockquote>
-<div class="section" id="unit-active-backup-current-active-next-active">
-<h2>unit      active      backup     current-active        next-active<a class="headerlink" href="#unit-active-backup-current-active-next-active" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div>1     1.1.0.8  5.13.12.14            1.1.0.8            1.1.0.8</div></blockquote>
-<p>(Switching) #</p>
-<p>! Switch system to boot from “Backup” image firmware</p>
-<p>(Switching) #boot system backup
-Activating image backup ..</p>
-<p>(Switching) #show bootvar</p>
-<p>Image Descriptions</p>
-<blockquote>
-<div><p>active : default image
-backup :</p>
-<p>Images currently available on Flash</p>
-</div></blockquote>
+4208280 bytes transferred...
+File contents are valid. Copying file to flash...
+
+
+File transfer operation completed successfully.
+
+(Switching) #
+</pre></div>
 </div>
-<div class="section" id="id1">
-<h2>unit      active      backup     current-active        next-active<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div>1     1.1.0.8  5.13.12.14            1.1.0.8         5.13.12.14</div></blockquote>
-<p>(Switching) #</p>
-<p>(Switching) #boot ?</p>
-<dl class="docutils">
-<dt>autoinstall              Used to enable/disable autoinstall operational mode</dt>
-<dd>on the switch.</dd>
-<dt>host                     Used to enable/disable autoinstall persistent mode on</dt>
-<dd>the switch.</dd>
-<dt>system                   Marks the given image as active for subsequent</dt>
-<dd>re-boots.</dd>
-</dl>
-<p>(Switching) #boot system backup
-Activating image backup ..</p>
-<p>(Switching) #show bootvar</p>
-<p>Image Descriptions</p>
-<blockquote>
-<div><p>active : default image
-backup :</p>
-<p>Images currently available on Flash</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">One trick to making sure the unit will accept the file, is to make sure you know the names of the firmware slots, use the <code class="docutils literal notranslate"><span class="pre">bootvar</span></code> command to find out what they are called. Mine started out as <em>active</em> in slot 1 and <em>backup</em> in slot 2, but after image flash and reboot to the new router firmware they changed to <code class="docutils literal notranslate"><span class="pre">image1</span></code> and <code class="docutils literal notranslate"><span class="pre">image2</span></code>.</p>
 </div>
-<div class="section" id="id2">
-<h2>unit      active      backup     current-active        next-active<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div>1     1.1.0.8  5.13.12.14            1.1.0.8         5.13.12.14</div></blockquote>
-<p>(Switching) #reload ?</p>
-<p>&lt;cr&gt;                     Press enter to execute the command.</p>
-<p>(Switching) #reload</p>
-<p>Are you sure you would like to reset the system? (y/n) y</p>
-<p>System will now restart!</p>
-<p>Boot Menu Version: 28 Apr 2008</p>
-<p>Calculating CRC of active image…done…
-Select an option. If no selection in 2 seconds then
-operational code will start.</p>
-<p>1 - Start operational code.
-2 - Start Boot Menu.
-Select (1, 2):</p>
-<p>Operational Code Date: Wed May 13 12:16:52 2009
-Uncompressing…..</p>
-<blockquote>
-<div>50%                     100%</div></blockquote>
-<p>Adding 48962 symbols for standalone.</p>
-<blockquote>
-<div>VxWorks</div></blockquote>
-<p>Copyright 1984-2002  Wind River Systems, Inc.</p>
-<blockquote>
-<div><blockquote>
-<div>CPU: Motorola E500 : Unknown system version</div></blockquote>
-<p>Runtime Name: VxWorks</p>
-</div></blockquote>
-<dl class="docutils">
-<dt>Runtime Version: 5.5.1</dt>
-<dd><blockquote class="first">
-<div><dl class="docutils">
-<dt>BSP version: 1.2/0</dt>
-<dd>Created: May 13 2009, 11:57:16</dd>
-</dl>
-</div></blockquote>
-<dl class="last docutils">
-<dt>WDB Comm Type: WDB_COMM_NETWORK</dt>
-<dd>WDB: Ready.</dd>
-</dl>
-</dd>
-</dl>
-<p>PCI unit 0: Dev 0xb514, Rev 0x01, Chip BCM56514_A0, Driver BCM56514_A0
-PCI unit 1: Dev 0xb514, Rev 0x01, Chip BCM56514_A0, Driver BCM56514_A0
-SOC unit 0 attached to PCI device BCM56514_A0
-SOC unit 1 attached to PCI device BCM56514_A0</p>
-<p>(Unit 1)&gt;</p>
-<p>NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE</p>
-<p>Unauthorized access and/or use prohibited.  All access and/or use subject to
-monitoring.</p>
-<p>NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE</p>
-<p>Applying configuration, please wait …</p>
-<p>Applying Global configuration, please wait …</p>
-<p>Applying Interface configuration, please wait …</p>
-<p>User:admin
-Password:
-(Routing) &gt;enable
-Password:</p>
-<p>(Routing) #show bootvar</p>
-<p>Image Descriptions</p>
-<blockquote>
-<div><p>image1 : default image
-image2 :</p>
-<p>Images currently available on Flash</p>
-</div></blockquote>
+<p>Now backup image contains 5.13.12.14 Router version:</p>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>(Switching) #show bootvar
+
+Image Descriptions
+
+ active : default image
+ backup :
+
+
+ Images currently available on Flash
+
+--------------------------------------------------------------------
+ unit      active      backup     current-active        next-active
+--------------------------------------------------------------------
+
+    1     1.1.0.8    5.13.12.14        1.1.0.8            1.1.0.8
+
+(Switching) #
+</pre></div>
 </div>
-<div class="section" id="unit-image1-image2-current-active-next-active">
-<h2>unit      image1      image2     current-active        next-active<a class="headerlink" href="#unit-image1-image2-current-active-next-active" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div>1     1.1.0.8  5.13.12.14             image2             image2</div></blockquote>
-<p>(Routing) #</p>
-<p>!system now running on new image
-!Check DHCP assignment</p>
-<p>(Routing) #show network</p>
-<p>IP Address………………………………. 0.0.0.0
-Subnet Mask……………………………… 0.0.0.0
-Default Gateway………………………….. 0.0.0.0
-Burned In MAC Address…………………….. 60:EB:69:A9:22:05
-Locally Administered MAC Address…………… 00:00:00:00:00:00
-MAC Address Type…………………………. Burned In
-Network Configuration Protocol Current……… None
-Management VLAN ID……………………….. 1</p>
-<p>(Routing) #</p>
-<p>&gt;&gt;all ports turned off, so no DHCP assignment received yet
-&gt;&gt;To turn on all ports</p>
-<p>(Routing) #configure</p>
-<p>(Routing) (Config)#no shutdown all</p>
-<p>(Routing) (Config)#exit</p>
-<p>(Routing) #show port all</p>
-<blockquote>
-<div><blockquote>
-<div>Admin   Physical   Physical   Link   Link    LACP   Actor</div></blockquote>
-<p>Intf   Type    Mode    Mode       Status   Status  Trap    Mode   Timeout</p>
-</div></blockquote>
-<p>—— —— ——- ———- ———- —— ——- —— ——–
+<p>Switch system to boot from “Backup” image firmware:</p>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span> (Switching) #boot system backup
+ Activating image backup ..
+
+ (Switching) #show bootvar
+
+ Image Descriptions
+
+  active : default image
+  backup :
+
+--------------------------------------------------------------------
+ unit      active      backup     current-active        next-active
+--------------------------------------------------------------------
+
+ 1        1.1.0.8    5.13.12.14       1.1.0.8            5.13.12.14
+
+ (Switching) #
+
+ (Switching) #boot ?
+
+
+  Images currently available on Flash
+
+ --------------------------------------------------------------------
+  unit      active      backup     current-active        next-active
+ --------------------------------------------------------------------
+
+     1     1.1.0.8    5.13.12.14      1.1.0.8             5.13.12.14
+
+ (Switching) #
+
+ (Switching) #boot ?
+
+ autoinstall              Used to enable/disable autoinstall operational mode
+                          on the switch.
+ host                     Used to enable/disable autoinstall persistent mode on
+                          the switch.
+ system                   Marks the given image as active for subsequent
+                          re-boots.
+
+ (Switching) #boot system backup
+ Activating image backup ..
+
+ (Switching) #show bootvar
+
+ Image Descriptions
+
+  active : default image
+  backup :
+
+
+  Images currently available on Flash
+
+ --------------------------------------------------------------------
+  unit      active      backup     current-active        next-active
+ --------------------------------------------------------------------
+
+     1     1.1.0.8     5.13.12.14      1.1.0.8            5.13.12.14
+
+ (Switching) #reload ?
+
+ &lt;cr&gt;                     Press enter to execute the command.
+
+ (Switching) #reload
+
+ Are you sure you would like to reset the system? (y/n) y
+
+
+ System will now restart!
+
+
+ Boot Menu Version: 28 Apr 2008
+
+ Calculating CRC of active image...done...
+ Select an option. If no selection in 2 seconds then
+ operational code will start.
+
+ 1 - Start operational code.
+ 2 - Start Boot Menu.
+ Select (1, 2):
+
+
+ Operational Code Date: Wed May 13 12:16:52 2009
+ Uncompressing.....
+
+                        50%                     100%
+ |||||||||||||||||||||||||||||||||||||||||||||||||||
+ Attaching interface lo0...done
+
+ Adding 48962 symbols for standalone.
+
+
+                 VxWorks
+
+ Copyright 1984-2002  Wind River Systems, Inc.
+
+             CPU: Motorola E500 : Unknown system version
+    Runtime Name: VxWorks
+ Runtime Version: 5.5.1
+     BSP version: 1.2/0
+         Created: May 13 2009, 11:57:16
+   WDB Comm Type: WDB_COMM_NETWORK
+             WDB: Ready.
+
+
+
+ PCI unit 0: Dev 0xb514, Rev 0x01, Chip BCM56514_A0, Driver BCM56514_A0
+ PCI unit 1: Dev 0xb514, Rev 0x01, Chip BCM56514_A0, Driver BCM56514_A0
+ SOC unit 0 attached to PCI device BCM56514_A0
+ SOC unit 1 attached to PCI device BCM56514_A0
+
+ (Unit 1)&gt;
+
+ NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE
+
+ Unauthorized access and/or use prohibited.  All access and/or use subject to
+ monitoring.
+
+ NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE
+
+ Applying configuration, please wait ...
+
+ Applying Global configuration, please wait ...
+
+ Applying Interface configuration, please wait ...
+
+ User:admin
+ Password:
+ (Routing) &gt;enable
+ Password:
+
+ (Routing) #show bootvar
+
+ Image Descriptions
+
+ image1 : default image
+ image2 :
+
+
+ Images currently available on Flash
+
+ --------------------------------------------------------------------
+  unit      image1      image2     current-active        next-active
+ --------------------------------------------------------------------
+
+     1     1.1.0.8    5.13.12.14        image2             image2
+
+ (Routing) #
+</pre></div>
+</div>
+<p>System now running on new image.
+Check DHCP assignment:</p>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>(Routing) #show network
+
+IP Address..................................... 0.0.0.0
+Subnet Mask.................................... 0.0.0.0
+Default Gateway................................ 0.0.0.0
+Burned In MAC Address.......................... 60:EB:69:A9:22:05
+Locally Administered MAC Address............... 00:00:00:00:00:00
+MAC Address Type............................... Burned In
+Network Configuration Protocol Current......... None
+Management VLAN ID............................. 1
+
+(Routing) #
+</pre></div>
+</div>
+<p>All ports turned off, so no DHCP assignment received yet.
+To turn on all ports:</p>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>(Routing) #configure
+
+(Routing) (Config)#no shutdown all
+
+(Routing) (Config)#exit
+
+(Routing) #show port all
+
+               Admin   Physical   Physical   Link   Link    LACP   Actor
+ Intf   Type    Mode    Mode       Status   Status  Trap    Mode   Timeout
+------ ------ ------- ---------- ---------- ------ ------- ------ --------
 0/1           Enable   Auto       1000 Full  Up     Enable Enable long
 0/2           Enable   Auto                  Down   Enable Enable long
 0/3           Enable   Auto                  Down   Enable Enable long
@@ -370,15 +415,24 @@ Management VLAN ID……………………….. 1</p>
 0/15          Enable   Auto                  Down   Enable Enable long
 0/16          Enable   Auto                  Down   Enable Enable long
 0/17          Enable   Auto                  Down   Enable Enable long
-0/18          Enable   Auto                  Down   Enable Enable long</p>
-<p>–More– or (q)uit</p>
-<p>(Routing) #write memory</p>
+0/18          Enable   Auto                  Down   Enable Enable long
+
+--More-- or (q)uit
+
+
+(Routing) #write memory
+</pre></div>
+</div>
 <p>This operation may take a few minutes.
 Management interfaces will not be available during this time.</p>
-<p>Are you sure you want to save? (y/n) y</p>
-<p>Config file ‘startup-config’ created successfully .</p>
-<p>Configuration Saved!</p>
-<p>(Routing) #</p>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>Are you sure you want to save? (y/n) y
+
+Config file &#39;startup-config&#39; created successfully .
+
+Configuration Saved!
+
+(Routing) #
+</pre></div>
 </div>
 </div>
 
