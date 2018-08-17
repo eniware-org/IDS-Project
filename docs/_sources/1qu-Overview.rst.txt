@@ -67,7 +67,6 @@ PC using a terminal emulation program.
 
 .. image:: /images/LB4M_front_panel.png
    :alt: Quanta front panel
-   :scale: 100%
 
 
 Rear Panel Description
@@ -77,7 +76,6 @@ The redundant AC/DC power unit is a two slots for redundant, hot-swappable power
 
 .. image:: /images/LB4M_rear_panel.png
    :alt: Quanta rear panel
-   :scale: 100%
 
 Management Options
 ------------------

@@ -19,7 +19,6 @@ A typical computer network has several access points to other networks, both pub
 
 .. image:: /images/diagram-what-is-idp.png
    :alt: What is IDS?
-   :scale: 60%
  
 
 What Can You Do with IDS?
@@ -44,6 +43,6 @@ EniWARE Implementation
 -------------------------------
 
 
-EniWARE uses its **SRX Series Services Gateways** for intrusion detection services. You can selectively enforce various attack detection and prevention techniques on the network traffic passing through your chosen **SRX Series device**. You can define policy rules to match a section of traffic based on a zone, a network, or an application, and then take active or passive preventative actions on that traffic.
+EniWARE uses its **???????????** for intrusion detection services. You can selectively enforce various attack detection and prevention techniques on the network traffic passing through your chosen **???? device**. You can define policy rules to match a section of traffic based on a zone, a network, or an application, and then take active or passive preventative actions on that traffic.
 
 
