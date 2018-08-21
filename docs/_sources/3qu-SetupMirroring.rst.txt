@@ -119,7 +119,7 @@ To enable the SSH access:
     (Routing) >enable
     Passsword:
 
-    (Switching) #ip ssh server enable
+    (Routing) #ip ssh server enable
 
 
 
@@ -133,7 +133,7 @@ To enable the Web interface:
     (Routing) >enable
     Passsword:
 
-    (Switching) #ip http server
+    (Routing) #ip http server
 
 
 Setup port mirroring
