@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Setup Port Mirroring" href="3qu-SetupMirroring.html" />
+    <link rel="next" title="Setup the Switch" href="3qu-SetupMirroring.html" />
     <link rel="prev" title="Overview" href="1qu-Overview.html" /> 
 
   
@@ -87,7 +87,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="quanta.html">Quanta LB4M Switch Setup</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="1qu-Overview.html">Overview</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Flashing Routing Firmware</a></li>
-<li class="toctree-l2"><a class="reference internal" href="3qu-SetupMirroring.html">Setup Port Mirroring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3qu-SetupMirroring.html">Setup the Switch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="4qu-Troubleshooting.html">Troubleshooting</a></li>
 </ul>
 </li>
@@ -160,27 +160,28 @@
             
   <div class="section" id="flashing-routing-firmware">
 <h1>Flashing Routing Firmware<a class="headerlink" href="#flashing-routing-firmware" title="Permalink to this headline">¶</a></h1>
-<p>Guide to install new firmware with CLI, confirm image, switch active boot image, turn on all ports, and finally don’t forget to “write memory”, this will set the configuration file.</p>
-<p>Use CLI with serial cable and settings on com port of <code class="docutils literal notranslate"><span class="pre">9600,8,N,1</span></code> (without any data checking).
-Hit enter a couple times, should get prompt, then use <code class="docutils literal notranslate"><span class="pre">admin</span></code> as login name default password is blank, so just enter, should get the <code class="docutils literal notranslate"><span class="pre">(Switching)&gt;</span></code> prompt then type command <code class="docutils literal notranslate"><span class="pre">enable</span></code>, will put you into command mode, password blank again.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If ever any questions on a command, or for a list of commands use the <code class="docutils literal notranslate"><span class="pre">?</span></code> symbol then enter.</p>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">FASTEST way to transfer image file (if no web page) is to use TFTP server, download a free one setup on either the machine you are using, or another on the same network, make sure to clear the TFTP program through the windows firewall, otherwise the switch won’t see it.</p>
-</div>
-<p>Once TFTP is ready to go, copy over the image file, and rename to something simple, I used xcode.bin</p>
-<p>Use the below command to copy from your tftp server (this one is at <code class="docutils literal notranslate"><span class="pre">10.0.5.250</span></code>, with root directory containing flash file <code class="docutils literal notranslate"><span class="pre">xcode.bin</span></code>)</p>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>(Switching) #copy tftp://10.0.5.250/xcode.bin backup
+<p>This is a guide to install new firmware with CLI, confirm image, switch active boot image, turn on all ports, and finally don’t forget to “write memory”, this will set the configuration file.</p>
+<dl class="docutils">
+<dt>Requirements:</dt>
+<dd><ul class="first last simple">
+<li>Running TFTP server;</li>
+<li>Downloaded firmware for <a class="reference external" href="https://puck.nether.net/~jared/lb4m/">Quanta LB4m</a> - firmware image <code class="docutils literal notranslate"><span class="pre">lb4m.1.1.1.8.bin</span></code> (You can use this <a class="reference external" href="https://puck.nether.net/~jared/lb4m/lb4m.1.1.1.8.bin">direct download link</a>;</li>
+<li>Client for serial port connection with the switch (for example <a class="reference external" href="https://putty.org/">PuTTY</a>).</li>
+</ul>
+</dd>
+</dl>
+<p>Below it will be use an address 192.168.50.2 for access to the TFTP server. The firmware name in this example is <code class="docutils literal notranslate"><span class="pre">firmware.bin</span></code>. Use appropriate settings for your specific case.</p>
+<p>Using PuTTY connect to the serial port (console port) of the switch using the following parameters <code class="docutils literal notranslate"><span class="pre">115200,8,N,1</span></code>.
+Hit enter once and you should get the prompt. Use <code class="docutils literal notranslate"><span class="pre">admin</span></code> as a login name, the default password is blank. Hit enter again and you should get the <code class="docutils literal notranslate"><span class="pre">(Switching)&gt;</span></code> prompt. Then type the command <code class="docutils literal notranslate"><span class="pre">enable</span></code> and the switsh will go into command mode (the password is blank again).</p>
+<p>Use the below command to copy from your tftp server:</p>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>(Switching) #copy tftp://192.168.50.2/firmware.bin image2
 
 Mode........................................... TFTP
-Set Server IP.................................. 10.0.5.250
+Set Server IP.................................. 192.168.50.2
 Path........................................... ./
-Filename....................................... xcode.bin
+Filename....................................... firmware.bin
 Data Type...................................... Code
-Destination Filename........................... backup
+Destination Filename........................... image2
 
 Management access will be blocked for the duration of the transfer
 Are you sure you want to start? (y/n) y
@@ -196,244 +197,144 @@ File transfer operation completed successfully.
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">One trick to making sure the unit will accept the file, is to make sure you know the names of the firmware slots, use the <code class="docutils literal notranslate"><span class="pre">bootvar</span></code> command to find out what they are called. Mine started out as <em>active</em> in slot 1 and <em>backup</em> in slot 2, but after image flash and reboot to the new router firmware they changed to <code class="docutils literal notranslate"><span class="pre">image1</span></code> and <code class="docutils literal notranslate"><span class="pre">image2</span></code>.</p>
+<p class="last">To be sure that the unit will accept the file, you should check the names of the firmware slots. Use the <code class="docutils literal notranslate"><span class="pre">bootvar</span></code> command to find out what they are named. In our case they are  <code class="docutils literal notranslate"><span class="pre">image1</span></code> in slot 1 and <code class="docutils literal notranslate"><span class="pre">image2</span></code> in slot 2. .</p>
 </div>
-<p>Now backup image contains 5.13.12.14 Router version:</p>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>(Switching) #show bootvar
+<p>Now image2 slot contains 1.1.0.8 Router version:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Switching</span><span class="p">)</span> <span class="c1">#show bootvar</span>
+</pre></div>
+</div>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>Image Descriptions
+
+ image1 : default image
+ image2 :
+
+
+Images currently available on Flash
+
+--------------------------------------------------------------------
+ unit      image1      image2     current-active        next-active
+--------------------------------------------------------------------
+
+    1     5.13.12.14    1.1.0.8        image1            image1
+
+(Switching) #
+</pre></div>
+</div>
+<p>Switch system to boot from “image2” firmware:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Switching</span><span class="p">)</span> <span class="c1">#boot system image2</span>
+</pre></div>
+</div>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>Activating image image2 ..
+
+(Switching) #show bootvar
 
 Image Descriptions
 
  active : default image
  backup :
 
+ --------------------------------------------------------------------
+   unit      image1      image2     current-active        next-active
+ --------------------------------------------------------------------
 
- Images currently available on Flash
-
---------------------------------------------------------------------
- unit      active      backup     current-active        next-active
---------------------------------------------------------------------
-
-    1     1.1.0.8    5.13.12.14        1.1.0.8            1.1.0.8
-
-(Switching) #
-</pre></div>
-</div>
-<p>Switch system to boot from “Backup” image firmware:</p>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span> (Switching) #boot system backup
- Activating image backup ..
-
- (Switching) #show bootvar
-
- Image Descriptions
-
-  active : default image
-  backup :
-
---------------------------------------------------------------------
- unit      active      backup     current-active        next-active
---------------------------------------------------------------------
-
- 1        1.1.0.8    5.13.12.14       1.1.0.8            5.13.12.14
+    1     5.13.12.14    1.1.0.8        image1            image1
 
  (Switching) #
-
- (Switching) #boot ?
-
-
-  Images currently available on Flash
-
- --------------------------------------------------------------------
-  unit      active      backup     current-active        next-active
- --------------------------------------------------------------------
-
-     1     1.1.0.8    5.13.12.14      1.1.0.8             5.13.12.14
-
- (Switching) #
-
- (Switching) #boot ?
-
- autoinstall              Used to enable/disable autoinstall operational mode
-                          on the switch.
- host                     Used to enable/disable autoinstall persistent mode on
-                          the switch.
- system                   Marks the given image as active for subsequent
-                          re-boots.
-
- (Switching) #boot system backup
- Activating image backup ..
-
- (Switching) #show bootvar
-
- Image Descriptions
-
-  active : default image
-  backup :
-
-
-  Images currently available on Flash
-
- --------------------------------------------------------------------
-  unit      active      backup     current-active        next-active
- --------------------------------------------------------------------
-
-     1     1.1.0.8     5.13.12.14      1.1.0.8            5.13.12.14
-
- (Switching) #reload ?
-
- &lt;cr&gt;                     Press enter to execute the command.
-
- (Switching) #reload
-
- Are you sure you would like to reset the system? (y/n) y
-
-
- System will now restart!
-
-
- Boot Menu Version: 28 Apr 2008
-
- Calculating CRC of active image...done...
- Select an option. If no selection in 2 seconds then
- operational code will start.
-
- 1 - Start operational code.
- 2 - Start Boot Menu.
- Select (1, 2):
-
-
- Operational Code Date: Wed May 13 12:16:52 2009
- Uncompressing.....
-
-                        50%                     100%
- |||||||||||||||||||||||||||||||||||||||||||||||||||
- Attaching interface lo0...done
-
- Adding 48962 symbols for standalone.
-
-
-                 VxWorks
-
- Copyright 1984-2002  Wind River Systems, Inc.
-
-             CPU: Motorola E500 : Unknown system version
-    Runtime Name: VxWorks
- Runtime Version: 5.5.1
-     BSP version: 1.2/0
-         Created: May 13 2009, 11:57:16
-   WDB Comm Type: WDB_COMM_NETWORK
-             WDB: Ready.
-
-
-
- PCI unit 0: Dev 0xb514, Rev 0x01, Chip BCM56514_A0, Driver BCM56514_A0
- PCI unit 1: Dev 0xb514, Rev 0x01, Chip BCM56514_A0, Driver BCM56514_A0
- SOC unit 0 attached to PCI device BCM56514_A0
- SOC unit 1 attached to PCI device BCM56514_A0
-
- (Unit 1)&gt;
-
- NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE
-
- Unauthorized access and/or use prohibited.  All access and/or use subject to
- monitoring.
-
- NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE
-
- Applying configuration, please wait ...
-
- Applying Global configuration, please wait ...
-
- Applying Interface configuration, please wait ...
-
- User:admin
- Password:
- (Routing) &gt;enable
- Password:
-
- (Routing) #show bootvar
-
- Image Descriptions
-
- image1 : default image
- image2 :
-
-
- Images currently available on Flash
-
- --------------------------------------------------------------------
-  unit      image1      image2     current-active        next-active
- --------------------------------------------------------------------
-
-     1     1.1.0.8    5.13.12.14        image2             image2
-
- (Routing) #
 </pre></div>
 </div>
-<p>System now running on new image.
-Check DHCP assignment:</p>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>(Routing) #show network
-
-IP Address..................................... 0.0.0.0
-Subnet Mask.................................... 0.0.0.0
-Default Gateway................................ 0.0.0.0
-Burned In MAC Address.......................... 60:EB:69:A9:22:05
-Locally Administered MAC Address............... 00:00:00:00:00:00
-MAC Address Type............................... Burned In
-Network Configuration Protocol Current......... None
-Management VLAN ID............................. 1
-
-(Routing) #
+<p>Now you should redoot the switch:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Switching</span><span class="p">)</span> <span class="c1">#reload</span>
 </pre></div>
 </div>
-<p>All ports turned off, so no DHCP assignment received yet.
-To turn on all ports:</p>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>(Routing) #configure
-
-(Routing) (Config)#no shutdown all
-
-(Routing) (Config)#exit
-
-(Routing) #show port all
-
-               Admin   Physical   Physical   Link   Link    LACP   Actor
- Intf   Type    Mode    Mode       Status   Status  Trap    Mode   Timeout
------- ------ ------- ---------- ---------- ------ ------- ------ --------
-0/1           Enable   Auto       1000 Full  Up     Enable Enable long
-0/2           Enable   Auto                  Down   Enable Enable long
-0/3           Enable   Auto                  Down   Enable Enable long
-0/4           Enable   Auto                  Down   Enable Enable long
-0/5           Enable   Auto                  Down   Enable Enable long
-0/6           Enable   Auto                  Down   Enable Enable long
-0/7           Enable   Auto                  Down   Enable Enable long
-0/8           Enable   Auto                  Down   Enable Enable long
-0/9           Enable   Auto                  Down   Enable Enable long
-0/10          Enable   Auto                  Down   Enable Enable long
-0/11          Enable   Auto                  Down   Enable Enable long
-0/12          Enable   Auto                  Down   Enable Enable long
-0/13          Enable   Auto                  Down   Enable Enable long
-0/14          Enable   Auto                  Down   Enable Enable long
-0/15          Enable   Auto                  Down   Enable Enable long
-0/16          Enable   Auto                  Down   Enable Enable long
-0/17          Enable   Auto                  Down   Enable Enable long
-0/18          Enable   Auto                  Down   Enable Enable long
-
---More-- or (q)uit
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>Are you sure you would like to reset the system? (y/n) y
 
 
-(Routing) #write memory
+System will now restart!
+
+
+Boot Menu Version: 28 Apr 2008
+
+Calculating CRC of active image...done...
+Select an option. If no selection in 2 seconds then
+operational code will start.
+
+1 - Start operational code.
+2 - Start Boot Menu.
+Select (1, 2):
+
+
+Operational Code Date: Wed May 13 12:16:52 2009
+Uncompressing.....
+
+                       50%                     100%
+|||||||||||||||||||||||||||||||||||||||||||||||||||
+Attaching interface lo0...done
+
+Adding 48962 symbols for standalone.
+
+
+                VxWorks
+
+Copyright 1984-2002  Wind River Systems, Inc.
+
+            CPU: Motorola E500 : Unknown system version
+   Runtime Name: VxWorks
+Runtime Version: 5.5.1
+    BSP version: 1.2/0
+        Created: May 13 2009, 11:57:16
+  WDB Comm Type: WDB_COMM_NETWORK
+            WDB: Ready.
+
+
+
+PCI unit 0: Dev 0xb514, Rev 0x01, Chip BCM56514_A0, Driver BCM56514_A0
+PCI unit 1: Dev 0xb514, Rev 0x01, Chip BCM56514_A0, Driver BCM56514_A0
+SOC unit 0 attached to PCI device BCM56514_A0
+SOC unit 1 attached to PCI device BCM56514_A0
+
+(Unit 1)&gt;
+
+NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE
+
+Unauthorized access and/or use prohibited.  All access and/or use subject to
+monitoring.
+
+NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE
+
+Applying configuration, please wait ...
+
+Applying Global configuration, please wait ...
+
+Applying Interface configuration, please wait ...
 </pre></div>
 </div>
-<p>This operation may take a few minutes.
-Management interfaces will not be available during this time.</p>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>Are you sure you want to save? (y/n) y
+<p>Login into the switch and check if the new firmware is running:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">User</span><span class="p">:</span><span class="n">admin</span>
+<span class="n">Password</span><span class="p">:</span>
 
-Config file &#39;startup-config&#39; created successfully .
+<span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="o">&gt;</span><span class="n">enable</span>
+<span class="n">Password</span><span class="p">:</span>
 
-Configuration Saved!
+<span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#show bootvar</span>
 
-(Routing) #
+<span class="n">Image</span> <span class="n">Descriptions</span>
+
+<span class="n">image1</span> <span class="p">:</span> <span class="n">default</span> <span class="n">image</span>
+<span class="n">image2</span> <span class="p">:</span>
+
+
+<span class="n">Images</span> <span class="n">currently</span> <span class="n">available</span> <span class="n">on</span> <span class="n">Flash</span>
+
+<span class="o">--------------------------------------------------------------------</span>
+ <span class="n">unit</span>      <span class="n">image1</span>      <span class="n">image2</span>     <span class="n">current</span><span class="o">-</span><span class="n">active</span>        <span class="nb">next</span><span class="o">-</span><span class="n">active</span>
+<span class="o">--------------------------------------------------------------------</span>
+
+    <span class="mi">1</span>     <span class="mf">1.1</span><span class="o">.</span><span class="mf">0.8</span>    <span class="mf">5.13</span><span class="o">.</span><span class="mf">12.14</span>        <span class="n">image2</span>             <span class="n">image2</span>
+
+<span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#</span>
 </pre></div>
 </div>
+<p>The system is now running the new firmware.</p>
 </div>
 
 
@@ -444,7 +345,7 @@ Configuration Saved!
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="3qu-SetupMirroring.html" class="btn btn-neutral float-right" title="Setup Port Mirroring" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="3qu-SetupMirroring.html" class="btn btn-neutral float-right" title="Setup the Switch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="1qu-Overview.html" class="btn btn-neutral" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

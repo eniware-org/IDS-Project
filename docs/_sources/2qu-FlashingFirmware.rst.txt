@@ -1,46 +1,79 @@
 Flashing Routing Firmware
 =========================
 
-Guide to install new firmware with CLI, confirm image, switch active boot image, turn on all ports, and finally don't forget to "write memory", this will set the configuration file.
+This is a guide to install new firmware with CLI, confirm image, switch active boot image, turn on all ports, and finally don't forget to "write memory", this will set the configuration file.
 
-Use CLI with serial cable and settings on com port of ``9600,8,N,1`` (without any data checking).
-Hit enter a couple times, should get prompt, then use ``admin`` as login name default password is blank, so just enter, should get the ``(Switching)>`` prompt then type command ``enable``, will put you into command mode, password blank again.
+Requirements:
+ - Running TFTP server;
+ - Downloaded firmware for `Quanta LB4m <https://puck.nether.net/~jared/lb4m/>`_ - firmware image ``lb4m.1.1.1.8.bin`` (You can use this `direct download link <https://puck.nether.net/~jared/lb4m/lb4m.1.1.1.8.bin>`_;
+ - Client for serial port connection with the switch (for example `PuTTY <https://putty.org/>`_).
 
-.. note:: If ever any questions on a command, or for a list of commands use the ``?`` symbol then enter.
+Below it will be use an address 192.168.50.2 for access to the TFTP server. The firmware name in this example is ``firmware.bin``. Use appropriate settings for your specific case.
 
-.. note:: FASTEST way to transfer image file (if no web page) is to use TFTP server, download a free one setup on either the machine you are using, or another on the same network, make sure to clear the TFTP program through the windows firewall, otherwise the switch won't see it.
+Using PuTTY connect to the serial port (console port) of the switch using the following parameters ``115200,8,N,1``.
+Hit enter once and you should get the prompt. Use ``admin`` as a login name, the default password is blank. Hit enter again and you should get the ``(Switching)>`` prompt. Then type the command ``enable`` and the switsh will go into command mode (the password is blank again).
 
-Once TFTP is ready to go, copy over the image file, and rename to something simple, I used xcode.bin
 
-Use the below command to copy from your tftp server (this one is at ``10.0.5.250``, with root directory containing flash file ``xcode.bin``)
+Use the below command to copy from your tftp server:
 
 .. code-block:: txt
 
-    (Switching) #copy tftp://10.0.5.250/xcode.bin backup
+ (Switching) #copy tftp://192.168.50.2/firmware.bin image2
 
-    Mode........................................... TFTP
-    Set Server IP.................................. 10.0.5.250
-    Path........................................... ./
-    Filename....................................... xcode.bin
-    Data Type...................................... Code
-    Destination Filename........................... backup
+ Mode........................................... TFTP
+ Set Server IP.................................. 192.168.50.2
+ Path........................................... ./
+ Filename....................................... firmware.bin
+ Data Type...................................... Code
+ Destination Filename........................... image2
 
-    Management access will be blocked for the duration of the transfer
-    Are you sure you want to start? (y/n) y
-    TFTP code transfer starting
-    4208280 bytes transferred...
-    File contents are valid. Copying file to flash...
+ Management access will be blocked for the duration of the transfer
+ Are you sure you want to start? (y/n) y
+ TFTP code transfer starting
+ 4208280 bytes transferred...
+ File contents are valid. Copying file to flash...
 
 
-    File transfer operation completed successfully.
+ File transfer operation completed successfully.
+
+ (Switching) #
+
+.. note:: To be sure that the unit will accept the file, you should check the names of the firmware slots. Use the ``bootvar`` command to find out what they are named. In our case they are  ``image1`` in slot 1 and ``image2`` in slot 2. .
+
+Now image2 slot contains 1.1.0.8 Router version:
+
+.. code::
+
+    (Switching) #show bootvar
+
+.. code-block:: txt
+
+    Image Descriptions
+
+     image1 : default image
+     image2 :
+
+
+    Images currently available on Flash
+
+    --------------------------------------------------------------------
+     unit      image1      image2     current-active        next-active
+    --------------------------------------------------------------------
+
+        1     5.13.12.14    1.1.0.8        image1            image1
 
     (Switching) #
 
-.. note:: One trick to making sure the unit will accept the file, is to make sure you know the names of the firmware slots, use the ``bootvar`` command to find out what they are called. Mine started out as *active* in slot 1 and *backup* in slot 2, but after image flash and reboot to the new router firmware they changed to ``image1`` and ``image2``.
 
-Now backup image contains 5.13.12.14 Router version:
+Switch system to boot from “image2” firmware:
+
+.. code::
+
+    (Switching) #boot system image2
 
 .. code-block:: txt
+
+    Activating image image2 ..
 
     (Switching) #show bootvar
 
@@ -49,85 +82,23 @@ Now backup image contains 5.13.12.14 Router version:
      active : default image
      backup :
 
+     --------------------------------------------------------------------
+       unit      image1      image2     current-active        next-active
+     --------------------------------------------------------------------
 
-     Images currently available on Flash
+        1     5.13.12.14    1.1.0.8        image1            image1
 
-    --------------------------------------------------------------------
-     unit      active      backup     current-active        next-active
-    --------------------------------------------------------------------
-
-        1     1.1.0.8    5.13.12.14        1.1.0.8            1.1.0.8
-
-    (Switching) #
-
-Switch system to boot from "Backup" image firmware:
-
-.. code-block:: txt
-
-    (Switching) #boot system backup
-    Activating image backup ..
-
-    (Switching) #show bootvar
-
-    Image Descriptions
-
-     active : default image
-     backup :
-
-   --------------------------------------------------------------------
-    unit      active      backup     current-active        next-active
-   --------------------------------------------------------------------
-
-    1        1.1.0.8    5.13.12.14       1.1.0.8            5.13.12.14
-
-    (Switching) #
-
-    (Switching) #boot ?
+     (Switching) #
 
 
-     Images currently available on Flash
+Now you should redoot the switch:
 
-    --------------------------------------------------------------------
-     unit      active      backup     current-active        next-active
-    --------------------------------------------------------------------
-
-        1     1.1.0.8    5.13.12.14      1.1.0.8             5.13.12.14
-
-    (Switching) #
-
-    (Switching) #boot ?
-
-    autoinstall              Used to enable/disable autoinstall operational mode
-                             on the switch.
-    host                     Used to enable/disable autoinstall persistent mode on
-                             the switch.
-    system                   Marks the given image as active for subsequent
-                             re-boots.
-
-    (Switching) #boot system backup
-    Activating image backup ..
-
-    (Switching) #show bootvar
-
-    Image Descriptions
-
-     active : default image
-     backup :
-
-
-     Images currently available on Flash
-
-    --------------------------------------------------------------------
-     unit      active      backup     current-active        next-active
-    --------------------------------------------------------------------
-
-        1     1.1.0.8     5.13.12.14      1.1.0.8            5.13.12.14
-
-    (Switching) #reload ?
-
-    <cr>                     Press enter to execute the command.
+.. code::
 
     (Switching) #reload
+
+
+.. code-block:: txt
 
     Are you sure you would like to reset the system? (y/n) y
 
@@ -190,8 +161,14 @@ Switch system to boot from "Backup" image firmware:
 
     Applying Interface configuration, please wait ...
 
+
+Login into the switch and check if the new firmware is running:
+
+.. code::
+
     User:admin
     Password:
+
     (Routing) >enable
     Password:
 
@@ -214,73 +191,4 @@ Switch system to boot from "Backup" image firmware:
     (Routing) #
 
 
-System now running on new image.
-Check DHCP assignment:
-
-.. code-block:: txt
-
-    (Routing) #show network
-
-    IP Address..................................... 0.0.0.0
-    Subnet Mask.................................... 0.0.0.0
-    Default Gateway................................ 0.0.0.0
-    Burned In MAC Address.......................... 60:EB:69:A9:22:05
-    Locally Administered MAC Address............... 00:00:00:00:00:00
-    MAC Address Type............................... Burned In
-    Network Configuration Protocol Current......... None
-    Management VLAN ID............................. 1
-
-    (Routing) #
-
-All ports turned off, so no DHCP assignment received yet.
-To turn on all ports:
-
-.. code-block:: txt
-
-    (Routing) #configure
-
-    (Routing) (Config)#no shutdown all
-
-    (Routing) (Config)#exit
-
-    (Routing) #show port all
-
-                   Admin   Physical   Physical   Link   Link    LACP   Actor
-     Intf   Type    Mode    Mode       Status   Status  Trap    Mode   Timeout
-    ------ ------ ------- ---------- ---------- ------ ------- ------ --------
-    0/1           Enable   Auto       1000 Full  Up     Enable Enable long
-    0/2           Enable   Auto                  Down   Enable Enable long
-    0/3           Enable   Auto                  Down   Enable Enable long
-    0/4           Enable   Auto                  Down   Enable Enable long
-    0/5           Enable   Auto                  Down   Enable Enable long
-    0/6           Enable   Auto                  Down   Enable Enable long
-    0/7           Enable   Auto                  Down   Enable Enable long
-    0/8           Enable   Auto                  Down   Enable Enable long
-    0/9           Enable   Auto                  Down   Enable Enable long
-    0/10          Enable   Auto                  Down   Enable Enable long
-    0/11          Enable   Auto                  Down   Enable Enable long
-    0/12          Enable   Auto                  Down   Enable Enable long
-    0/13          Enable   Auto                  Down   Enable Enable long
-    0/14          Enable   Auto                  Down   Enable Enable long
-    0/15          Enable   Auto                  Down   Enable Enable long
-    0/16          Enable   Auto                  Down   Enable Enable long
-    0/17          Enable   Auto                  Down   Enable Enable long
-    0/18          Enable   Auto                  Down   Enable Enable long
-
-    --More-- or (q)uit
-
-
-    (Routing) #write memory
-
-This operation may take a few minutes.
-Management interfaces will not be available during this time.
-
-.. code-block:: txt
-
-    Are you sure you want to save? (y/n) y
-
-    Config file 'startup-config' created successfully .
-
-    Configuration Saved!
-
-    (Routing) #
+The system is now running the new firmware.

@@ -1,4 +1,4 @@
-Setup the switch
+Setup the Switch
 ================
 
 Setup network settings

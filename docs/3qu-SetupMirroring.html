@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Setup Port Mirroring &mdash; IDS Project Documentation 1 documentation</title>
+  <title>Setup the Switch &mdash; IDS Project Documentation 1 documentation</title>
   
 
   
@@ -87,7 +87,13 @@
 <li class="toctree-l1 current"><a class="reference internal" href="quanta.html">Quanta LB4M Switch Setup</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="1qu-Overview.html">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2qu-FlashingFirmware.html">Flashing Routing Firmware</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Setup Port Mirroring</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setup the Switch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup-network-settings">Setup network settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-ssh-access">Enabling SSH access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-web-inteface">Enabling WEB inteface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup-port-mirroring">Setup port mirroring</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="4qu-Troubleshooting.html">Troubleshooting</a></li>
 </ul>
 </li>
@@ -139,7 +145,7 @@
         
           <li><a href="quanta.html">Quanta LB4M Switch Setup</a> &raquo;</li>
         
-      <li>Setup Port Mirroring</li>
+      <li>Setup the Switch</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -158,8 +164,119 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="setup-port-mirroring">
-<h1>Setup Port Mirroring<a class="headerlink" href="#setup-port-mirroring" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="setup-the-switch">
+<h1>Setup the Switch<a class="headerlink" href="#setup-the-switch" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setup-network-settings">
+<h2>Setup network settings<a class="headerlink" href="#setup-network-settings" title="Permalink to this headline">¶</a></h2>
+<p>The next step is to check and setup network settings:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#show network</span>
+</pre></div>
+</div>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>IP Address..................................... 0.0.0.0
+Subnet Mask.................................... 0.0.0.0
+Default Gateway................................ 0.0.0.0
+Burned In MAC Address.......................... 60:EB:69:A9:22:05
+Locally Administered MAC Address............... 00:00:00:00:00:00
+MAC Address Type............................... Burned In
+Network Configuration Protocol Current......... None
+Management VLAN ID............................. 1
+
+(Routing) #
+</pre></div>
+</div>
+<p>All ports are turned off, so no DHCP assignment received yet.
+To turn on all ports:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#configure</span>
+
+<span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="p">(</span><span class="n">Config</span><span class="p">)</span><span class="c1">#no shutdown all</span>
+
+<span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="p">(</span><span class="n">Config</span><span class="p">)</span><span class="c1">#exit</span>
+
+<span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#show port all</span>
+</pre></div>
+</div>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>               Admin   Physical   Physical   Link   Link    LACP   Actor
+ Intf   Type    Mode    Mode       Status   Status  Trap    Mode   Timeout
+------ ------ ------- ---------- ---------- ------ ------- ------ --------
+0/1           Enable   Auto       1000 Full  Up     Enable Enable long
+0/2           Enable   Auto                  Down   Enable Enable long
+0/3           Enable   Auto                  Down   Enable Enable long
+0/4           Enable   Auto                  Down   Enable Enable long
+0/5           Enable   Auto                  Down   Enable Enable long
+0/6           Enable   Auto                  Down   Enable Enable long
+0/7           Enable   Auto                  Down   Enable Enable long
+0/8           Enable   Auto                  Down   Enable Enable long
+0/9           Enable   Auto                  Down   Enable Enable long
+0/10          Enable   Auto                  Down   Enable Enable long
+0/11          Enable   Auto                  Down   Enable Enable long
+0/12          Enable   Auto                  Down   Enable Enable long
+0/13          Enable   Auto                  Down   Enable Enable long
+0/14          Enable   Auto                  Down   Enable Enable long
+0/15          Enable   Auto                  Down   Enable Enable long
+0/16          Enable   Auto                  Down   Enable Enable long
+0/17          Enable   Auto                  Down   Enable Enable long
+0/18          Enable   Auto                  Down   Enable Enable long
+
+--More-- or (q)uit
+</pre></div>
+</div>
+<p>The next step is to setup the switch IP address:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#network parms 192.168.50.91 255.255.255.0 192.168.0.1</span>
+</pre></div>
+</div>
+<p>Check the network settings:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#show network</span>
+</pre></div>
+</div>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>IP Address..................................... 192.168.50.91
+Subnet Mask.................................... 255.255.255.0
+Default Gateway................................ 192.168.50.91
+Burned In MAC Address.......................... 60:EB:69:A9:22:05
+Locally Administered MAC Address............... 00:00:00:00:00:00
+MAC Address Type............................... Burned In
+Network Configuration Protocol Current......... None
+Management VLAN ID............................. 1
+
+(Routing) #
+</pre></div>
+</div>
+<p>Write down the changes to router NVRAM. Otherwise all changes will be lost upon switch reset. This operation may take a few minutes. Management interfaces will not be available during this time.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#write memory</span>
+</pre></div>
+</div>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>Are you sure you want to save? (y/n) y
+
+Config file &#39;startup-config&#39; created successfully .
+
+Configuration Saved!
+
+(Routing) #
+</pre></div>
+</div>
+</div>
+<div class="section" id="enabling-ssh-access">
+<h2>Enabling SSH access<a class="headerlink" href="#enabling-ssh-access" title="Permalink to this headline">¶</a></h2>
+<p>To enable the SSH access:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="o">&gt;</span><span class="n">enable</span>
+<span class="n">Passsword</span><span class="p">:</span>
+
+<span class="p">(</span><span class="n">Switching</span><span class="p">)</span> <span class="c1">#ip ssh server enable</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="enabling-web-inteface">
+<h2>Enabling WEB inteface<a class="headerlink" href="#enabling-web-inteface" title="Permalink to this headline">¶</a></h2>
+<p>To enable the Web interface:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="o">&gt;</span><span class="n">enable</span>
+<span class="n">Passsword</span><span class="p">:</span>
+
+<span class="p">(</span><span class="n">Switching</span><span class="p">)</span> <span class="c1">#ip http server</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setup-port-mirroring">
+<h2>Setup port mirroring<a class="headerlink" href="#setup-port-mirroring" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
