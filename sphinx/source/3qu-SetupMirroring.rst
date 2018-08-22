@@ -222,8 +222,8 @@ To show the port mirroring session:
     0/42          Enable   Auto                  Down   Enable Enable long
     0/43          Enable   Auto                  Down   Enable Enable long
     0/44          Enable   Auto                  Down   Enable Enable long
-    0/45  Mirror  Enable   Auto       100 Full   Down   Enable Enable long
-    0/46  Probe   Enable   Auto       1000 Full  Down   Enable Enable long
+    0/45  Mirror  Enable   Auto       100 Full   Up     Enable Enable long
+    0/46  Probe   Enable   Auto       1000 Full  Up     Enable Enable long
     0/47          Enable   Auto                  Down   Enable Enable long
     0/48          Enable   Auto                  Down   Enable Enable long
 
@@ -237,19 +237,26 @@ Use this command for a specific port. The output shows whether the port is the m
 
 .. code::
 
-    (Ethernet Fabric) #show port 0/7
+    (Ethernet Fabric) #show port 0/45
 
 .. code-block:: guess
 
                      Admin    Physical  Physical  Link     Link     LACP
     Intf   Type      Mode     Mode      Status    Status   Trap     Mode
     ----   ----      ------   --------  --------  ------   ----     ----
-    0/7    Mirror    Enable   Auto                Down     Enable   Enable
-    (Ethernet Fabric) #show port 0/8
+    0/45   Mirror    Enable   Auto      100 Full   Up      Enable   Enable
+
+
+.. code::
+
+    (Ethernet Fabric) #show port 0/46
+
+.. code-block:: guess
+
                      Admin    Physical  Physical  Link     Link     LACP
     Intf   Type      Mode     Mode      Status    Status   Trap     Mode
     ----   ----      ------   --------  --------  ------   ----     ----
-    0/8    Probe     Enable   Auto                Down     Enable   Enable
+    0/46   Probe     Enable   Auto      1000 Full  Up      Enable   Enable
 
 
 .. _port-mirroring-web:

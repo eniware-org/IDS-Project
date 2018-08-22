@@ -352,8 +352,8 @@ Monitor session ID “1” - “1” is a hardware limitation.
 0/42          Enable   Auto                  Down   Enable Enable long
 0/43          Enable   Auto                  Down   Enable Enable long
 0/44          Enable   Auto                  Down   Enable Enable long
-0/45  Mirror  Enable   Auto       100 Full   Down   Enable Enable long
-0/46  Probe   Enable   Auto       1000 Full  Down   Enable Enable long
+0/45  Mirror  Enable   Auto       100 Full   Up     Enable Enable long
+0/46  Probe   Enable   Auto       1000 Full  Up     Enable Enable long
 0/47          Enable   Auto                  Down   Enable Enable long
 0/48          Enable   Auto                  Down   Enable Enable long
 </pre></div>
@@ -362,18 +362,22 @@ Monitor session ID “1” - “1” is a hardware limitation.
 <div class="section" id="show-the-status-of-the-source-and-destination-ports">
 <h3>Show the Status of the Source and Destination Ports<a class="headerlink" href="#show-the-status-of-the-source-and-destination-ports" title="Permalink to this headline">¶</a></h3>
 <p>Use this command for a specific port. The output shows whether the port is the mirror or the probe port, what is enabled or disabled on the port, etc.</p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Ethernet</span> <span class="n">Fabric</span><span class="p">)</span> <span class="c1">#show port 0/7</span>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Ethernet</span> <span class="n">Fabric</span><span class="p">)</span> <span class="c1">#show port 0/45</span>
 </pre></div>
 </div>
 <div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>                 Admin    Physical  Physical  Link     Link     LACP
 Intf   Type      Mode     Mode      Status    Status   Trap     Mode
 ----   ----      ------   --------  --------  ------   ----     ----
-0/7    Mirror    Enable   Auto                Down     Enable   Enable
-(Ethernet Fabric) #show port 0/8
-                 Admin    Physical  Physical  Link     Link     LACP
+0/45   Mirror    Enable   Auto      100 Full   Up      Enable   Enable
+</pre></div>
+</div>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Ethernet</span> <span class="n">Fabric</span><span class="p">)</span> <span class="c1">#show port 0/46</span>
+</pre></div>
+</div>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>                 Admin    Physical  Physical  Link     Link     LACP
 Intf   Type      Mode     Mode      Status    Status   Trap     Mode
 ----   ----      ------   --------  --------  ------   ----     ----
-0/8    Probe     Enable   Auto                Down     Enable   Enable
+0/46   Probe     Enable   Auto      1000 Full  Up      Enable   Enable
 </pre></div>
 </div>
 </div>
