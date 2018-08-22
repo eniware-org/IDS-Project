@@ -208,24 +208,26 @@ To show the port mirroring session:
 
 .. code-block:: guess
 
-                     Admin    Physical            Physical Link     Link     LACP
-    Intf    Type     Mode     Mode                Status   Status   Trap     Mode
-    ----    ----       ------   --------  --------  ------   ----     ----
-    0/1              Enable   Auto                Up       Enable   Enable
-    0/2              Enable   Auto                Down     Enable   Enable
-    0/3              Enable   Auto                Down     Enable   Enable
+                   Admin   Physical   Physical   Link   Link    LACP   Actor
+     Intf   Type    Mode    Mode       Status   Status  Trap    Mode   Timeout
+    ------ ------ ------- ---------- ---------- ------ ------- ------ --------
+    0/1           Enable   Auto       1000 Full  Up     Enable Enable long
+    0/2           Enable   Auto                  Down   Enable Enable long
+    0/3           Enable   Auto                  Down   Enable Enable long
 
      --More-- or (q)uit
 
-    0/40             Enable   Auto                Down     Enable   Enable
-    0/41             Enable   Auto                Down     Enable   Enable
-    0/42             Enable   Auto                Down     Enable   Enable
-    0/43             Enable   Auto                Down     Enable   Enable
-    0/44             Enable   Auto                Down     Enable   Enable
-    0/45   Mirror    Enable   Auto                Down     Enable   Enable
-    0/46   Probe     Enable   Auto                Down     Enable   Enable
-    0/47             Enable   Auto                Down     Enable   Enable
-    0/48             Enable   Auto                Down     Enable   Enable
+    0/40          Enable   Auto                  Down   Enable Enable long
+    0/41          Enable   Auto                  Down   Enable Enable long
+    0/42          Enable   Auto                  Down   Enable Enable long
+    0/43          Enable   Auto                  Down   Enable Enable long
+    0/44          Enable   Auto                  Down   Enable Enable long
+    0/45  Mirror  Enable   Auto       100 Full   Down   Enable Enable long
+    0/46  Probe   Enable   Auto       1000 Full  Down   Enable Enable long
+    0/47          Enable   Auto                  Down   Enable Enable long
+    0/48          Enable   Auto                  Down   Enable Enable long
+
+
 
 
 Show the Status of the Source and Destination Ports
