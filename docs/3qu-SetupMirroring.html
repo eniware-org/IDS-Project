@@ -88,11 +88,22 @@
 <li class="toctree-l2"><a class="reference internal" href="1qu-Overview.html">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2qu-FlashingFirmware.html">Flashing Routing Firmware</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Setup the Switch</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#setup-network-settings">Setup network settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#enabling-ssh-access">Enabling SSH access</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#enabling-web-inteface">Enabling WEB inteface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#setup-port-mirroring">Setup port mirroring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#new-title">New Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup-network-settings">Setup Network Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-ssh-access">Enabling SSH Access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-web-inteface">Enabling WEB Inteface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-configuration-changes">Saving Configuration Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-port-mirroring">Configuring Port Mirroring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-port-mirroring">What is Port Mirroring?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-port-mirroring-via-cli">Configuring Port Mirroring via CLI</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setting-up-a-port-mirroring-session">Setting up a Port Mirroring Session</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#show-the-port-mirroring-session">Show the Port Mirroring Session</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#show-the-status-of-all-ports">Show the Status of All Ports</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#show-the-status-of-the-source-and-destination-ports">Show the Status of the Source and Destination Ports</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-port-mirroring-via-web-interface">Configuring Port Mirroring via Web Interface</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="4qu-Troubleshooting.html">Troubleshooting</a></li>
@@ -168,12 +179,12 @@
   <div class="section" id="setup-the-switch">
 <h1>Setup the Switch<a class="headerlink" href="#setup-the-switch" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="setup-network-settings">
-<h2>Setup network settings<a class="headerlink" href="#setup-network-settings" title="Permalink to this headline">¶</a></h2>
+<h2>Setup Network Settings<a class="headerlink" href="#setup-network-settings" title="Permalink to this headline">¶</a></h2>
 <p>The next step is to check and setup network settings:</p>
 <div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#show network</span>
 </pre></div>
 </div>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>IP Address..................................... 0.0.0.0
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>IP Address..................................... 0.0.0.0
 Subnet Mask.................................... 0.0.0.0
 Default Gateway................................ 0.0.0.0
 Burned In MAC Address.......................... 60:EB:69:A9:22:05
@@ -196,7 +207,7 @@ To turn on all ports:</p>
 <span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#show port all</span>
 </pre></div>
 </div>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>               Admin   Physical   Physical   Link   Link    LACP   Actor
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>               Admin   Physical   Physical   Link   Link    LACP   Actor
  Intf   Type    Mode    Mode       Status   Status  Trap    Mode   Timeout
 ------ ------ ------- ---------- ---------- ------ ------- ------ --------
 0/1           Enable   Auto       1000 Full  Up     Enable Enable long
@@ -222,14 +233,14 @@ To turn on all ports:</p>
 </pre></div>
 </div>
 <p>The next step is to setup the switch IP address:</p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#network parms 192.168.50.91 255.255.255.0 192.168.0.1</span>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#network parms 192.168.50.91 255.255.255.0 192.168.50.1</span>
 </pre></div>
 </div>
 <p>Check the network settings:</p>
 <div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#show network</span>
 </pre></div>
 </div>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>IP Address..................................... 192.168.50.91
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>IP Address..................................... 192.168.50.91
 Subnet Mask.................................... 255.255.255.0
 Default Gateway................................ 192.168.50.91
 Burned In MAC Address.......................... 60:EB:69:A9:22:05
@@ -241,22 +252,9 @@ Management VLAN ID............................. 1
 (Routing) #
 </pre></div>
 </div>
-<p>Write down the changes to router NVRAM. Otherwise all changes will be lost upon switch reset. This operation may take a few minutes. Management interfaces will not be available during this time.</p>
-<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#write memory</span>
-</pre></div>
-</div>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>Are you sure you want to save? (y/n) y
-
-Config file &#39;startup-config&#39; created successfully .
-
-Configuration Saved!
-
-(Routing) #
-</pre></div>
-</div>
 </div>
 <div class="section" id="enabling-ssh-access">
-<h2>Enabling SSH access<a class="headerlink" href="#enabling-ssh-access" title="Permalink to this headline">¶</a></h2>
+<span id="enablig-ssh"></span><h2>Enabling SSH Access<a class="headerlink" href="#enabling-ssh-access" title="Permalink to this headline">¶</a></h2>
 <p>To enable the SSH access:</p>
 <div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="o">&gt;</span><span class="n">enable</span>
 <span class="n">Passsword</span><span class="p">:</span>
@@ -266,7 +264,7 @@ Configuration Saved!
 </div>
 </div>
 <div class="section" id="enabling-web-inteface">
-<h2>Enabling WEB inteface<a class="headerlink" href="#enabling-web-inteface" title="Permalink to this headline">¶</a></h2>
+<span id="enablig-web"></span><h2>Enabling WEB Inteface<a class="headerlink" href="#enabling-web-inteface" title="Permalink to this headline">¶</a></h2>
 <p>To enable the Web interface:</p>
 <div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="o">&gt;</span><span class="n">enable</span>
 <span class="n">Passsword</span><span class="p">:</span>
@@ -275,11 +273,113 @@ Configuration Saved!
 </pre></div>
 </div>
 </div>
-<div class="section" id="setup-port-mirroring">
-<h2>Setup port mirroring<a class="headerlink" href="#setup-port-mirroring" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="saving-configuration-changes">
+<h2>Saving Configuration Changes<a class="headerlink" href="#saving-configuration-changes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Write down the changes to router NVRAM.</strong> Otherwise all changes will be lost upon switch reset! This operation may take a few minutes. Management interfaces will not be available during this time.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#write memory</span>
+</pre></div>
 </div>
-<div class="section" id="new-title">
-<h2>New Title<a class="headerlink" href="#new-title" title="Permalink to this headline">¶</a></h2>
+<div class="last highlight-guess notranslate"><div class="highlight"><pre><span></span>Are you sure you want to save? (y/n) y
+
+Config file &#39;startup-config&#39; created successfully .
+
+Configuration Saved!
+
+(Routing) #
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="configuring-port-mirroring">
+<span id="port-mirroring"></span><h1>Configuring Port Mirroring<a class="headerlink" href="#configuring-port-mirroring" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-port-mirroring">
+<h2>What is Port Mirroring?<a class="headerlink" href="#what-is-port-mirroring" title="Permalink to this headline">¶</a></h2>
+<p>The port mirroring feature allows the switch to copy the network traffic from one or several source port to a destination port. The destination port can mirror packets transmitted or
+received by the source port(-s) or both. Only one port can be set as a destination port for the mirroring, but the source port can be one or more.</p>
+</div>
+<div class="section" id="configuring-port-mirroring-via-cli">
+<span id="port-mirroring-cli"></span><h2>Configuring Port Mirroring via CLI<a class="headerlink" href="#configuring-port-mirroring-via-cli" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setting-up-a-port-mirroring-session">
+<h3>Setting up a Port Mirroring Session<a class="headerlink" href="#setting-up-a-port-mirroring-session" title="Permalink to this headline">¶</a></h3>
+<p>The following commands enable port mirroring session and configure source and destination ports.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#Config</span>
+<span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="p">(</span><span class="n">Config</span><span class="p">)</span> <span class="c1">#monitor session 1 mode</span>
+<span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="p">(</span><span class="n">Config</span><span class="p">)</span> <span class="c1">#monitor session 1 source interface 0/45 ?</span>
+<span class="o">&lt;</span><span class="n">cr</span><span class="o">&gt;</span>                     <span class="n">Press</span> <span class="n">Enter</span> <span class="n">to</span> <span class="n">execute</span> <span class="n">the</span> <span class="n">command</span><span class="o">.</span>
+<span class="n">rx</span>                       <span class="n">Monitor</span> <span class="n">ingress</span> <span class="n">packets</span> <span class="n">only</span><span class="o">.</span>
+<span class="n">tx</span>                       <span class="n">Monitor</span> <span class="n">egress</span> <span class="n">packets</span> <span class="n">only</span><span class="o">.</span>
+<span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="p">(</span><span class="n">Config</span><span class="p">)</span> <span class="c1">#monitor session 1 source interface 0/45</span>
+<span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="p">(</span><span class="n">Config</span><span class="p">)</span> <span class="c1">#monitor session 1 destination interface 0/46</span>
+<span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="p">(</span><span class="n">Config</span><span class="p">)</span> <span class="c1">#exit</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="show-the-port-mirroring-session">
+<h3>Show the Port Mirroring Session<a class="headerlink" href="#show-the-port-mirroring-session" title="Permalink to this headline">¶</a></h3>
+<p>To show the port mirroring session:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#show monitor session 1</span>
+</pre></div>
+</div>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>Session ID   Admin Mode   Probe Port   Mirrored Port   Type
+----------   ----------   ----------   -------------   -----
+1            Enable       0/46          0/45             Rx,Tx
+
+
+Monitor session ID “1” - “1” is a hardware limitation.
+</pre></div>
+</div>
+</div>
+<div class="section" id="show-the-status-of-all-ports">
+<h3>Show the Status of All Ports<a class="headerlink" href="#show-the-status-of-all-ports" title="Permalink to this headline">¶</a></h3>
+<p>To show the port mirroring session:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#show port all</span>
+</pre></div>
+</div>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>                 Admin    Physical            Physical Link     Link     LACP
+Intf    Type     Mode     Mode                Status   Status   Trap     Mode
+----    ----       ------   --------  --------  ------   ----     ----
+0/1              Enable   Auto                Up       Enable   Enable
+0/2              Enable   Auto                Down     Enable   Enable
+0/3              Enable   Auto                Down     Enable   Enable
+
+ --More-- or (q)uit
+
+0/40             Enable   Auto                Down     Enable   Enable
+0/41             Enable   Auto                Down     Enable   Enable
+0/42             Enable   Auto                Down     Enable   Enable
+0/43             Enable   Auto                Down     Enable   Enable
+0/44             Enable   Auto                Down     Enable   Enable
+0/45   Mirror    Enable   Auto                Down     Enable   Enable
+0/46   Probe     Enable   Auto                Down     Enable   Enable
+0/47             Enable   Auto                Down     Enable   Enable
+0/48             Enable   Auto                Down     Enable   Enable
+</pre></div>
+</div>
+</div>
+<div class="section" id="show-the-status-of-the-source-and-destination-ports">
+<h3>Show the Status of the Source and Destination Ports<a class="headerlink" href="#show-the-status-of-the-source-and-destination-ports" title="Permalink to this headline">¶</a></h3>
+<p>Use this command for a specific port. The output shows whether the port is the mirror or the probe port, what is enabled or disabled on the port, etc.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Ethernet</span> <span class="n">Fabric</span><span class="p">)</span> <span class="c1">#show port 0/7</span>
+</pre></div>
+</div>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>                 Admin    Physical  Physical  Link     Link     LACP
+Intf   Type      Mode     Mode      Status    Status   Trap     Mode
+----   ----      ------   --------  --------  ------   ----     ----
+0/7    Mirror    Enable   Auto                Down     Enable   Enable
+(Ethernet Fabric) #show port 0/8
+                 Admin    Physical  Physical  Link     Link     LACP
+Intf   Type      Mode     Mode      Status    Status   Trap     Mode
+----   ----      ------   --------  --------  ------   ----     ----
+0/8    Probe     Enable   Auto                Down     Enable   Enable
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="configuring-port-mirroring-via-web-interface">
+<span id="port-mirroring-web"></span><h2>Configuring Port Mirroring via Web Interface<a class="headerlink" href="#configuring-port-mirroring-via-web-interface" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

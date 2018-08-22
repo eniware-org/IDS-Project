@@ -13,6 +13,7 @@ Ethernet ports for out of service. The LB4M also provides SFP+ interfaces for 10
 the daughter board. The number of 10-Giga ports depend on selecting daughter board.
 
 
+.. _switch-features:
 
 Features
 --------
@@ -80,8 +81,10 @@ The redundant AC/DC power unit is a two slots for redundant, hot-swappable power
 Management Options
 ------------------
 
-The system may be managed by using two Service Ports through a Web Browswer,Telent, SNMP Function and using the console port on the front panel through CLI command.
+The system may be managed by using two Service Ports through a Web Browswer, Telent, SNMP Function and using the console port on the front panel through CLI command.
 
+
+.. _switch-web-management:
 
 Web-based Management Interface
 ------------------------------
@@ -90,6 +93,9 @@ After you have successfully installed the Switch, you can configure the Switch, 
 
 .. note:: To access the Switch through a Web browser, the computer running the Web browser must have IP-based network access to the Switch.
 
+To enable the web interface, see :ref:`enablig-web`.
+
+.. _switch-cli-management:
 
 Command Line Console Interface Through the Serial Port or Telnet
 ----------------------------------------------------------------

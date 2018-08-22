@@ -1,7 +1,7 @@
 Setup the Switch
 ================
 
-Setup network settings
+Setup Network Settings
 ----------------------
 
 The next step is to check and setup network settings:
@@ -10,7 +10,7 @@ The next step is to check and setup network settings:
 
     (Routing) #show network
 
-.. code-block:: txt
+.. code-block:: guess
 
     IP Address..................................... 0.0.0.0
     Subnet Mask.................................... 0.0.0.0
@@ -38,7 +38,7 @@ To turn on all ports:
     (Routing) #show port all
 
 
-.. code-block:: txt
+.. code-block:: guess
 
                    Admin   Physical   Physical   Link   Link    LACP   Actor
      Intf   Type    Mode    Mode       Status   Status  Trap    Mode   Timeout
@@ -69,7 +69,7 @@ The next step is to setup the switch IP address:
 
 .. code::
 
-    (Routing) #network parms 192.168.50.91 255.255.255.0 192.168.0.1
+    (Routing) #network parms 192.168.50.91 255.255.255.0 192.168.50.1
 
 
 Check the network settings:
@@ -78,7 +78,7 @@ Check the network settings:
 
     (Routing) #show network
 
-.. code-block:: txt
+.. code-block:: guess
 
     IP Address..................................... 192.168.50.91
     Subnet Mask.................................... 255.255.255.0
@@ -92,24 +92,9 @@ Check the network settings:
     (Routing) #
 
 
-Write down the changes to router NVRAM. Otherwise all changes will be lost upon switch reset. This operation may take a few minutes. Management interfaces will not be available during this time.
+.. _enablig-ssh:
 
-.. code::
-
-    (Routing) #write memory
-
-.. code-block:: txt
-
-    Are you sure you want to save? (y/n) y
-
-    Config file 'startup-config' created successfully .
-
-    Configuration Saved!
-
-    (Routing) #
-
-
-Enabling SSH access
+Enabling SSH Access
 -------------------
 
 To enable the SSH access:
@@ -122,8 +107,9 @@ To enable the SSH access:
     (Routing) #ip ssh server enable
 
 
+.. _enablig-web:
 
-Enabling WEB inteface
+Enabling WEB Inteface
 ---------------------
 
 To enable the Web interface:
@@ -136,12 +122,136 @@ To enable the Web interface:
     (Routing) #ip http server
 
 
-Setup port mirroring
---------------------
+Saving Configuration Changes
+----------------------------
 
-New Title
------------
+.. warning:: **Write down the changes to router NVRAM.** Otherwise all changes will be lost upon switch reset! This operation may take a few minutes. Management interfaces will not be available during this time.
+
+    .. code::
+
+        (Routing) #write memory
+
+    .. code-block:: guess
+
+        Are you sure you want to save? (y/n) y
+
+        Config file 'startup-config' created successfully .
+
+        Configuration Saved!
+
+        (Routing) #
 
 
 
+.. _port-mirroring:
+
+Configuring Port Mirroring
+==========================
+
+What is Port Mirroring?
+-----------------------
+
+The port mirroring feature allows the switch to copy the network traffic from one or several source port to a destination port. The destination port can mirror packets transmitted or
+received by the source port(-s) or both. Only one port can be set as a destination port for the mirroring, but the source port can be one or more.
+
+
+.. _port-mirroring-cli:
+
+Configuring Port Mirroring via CLI
+----------------------------------
+
+Setting up a Port Mirroring Session
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following commands enable port mirroring session and configure source and destination ports.
+
+.. code::
+
+  (Routing) #Config
+  (Routing) (Config) #monitor session 1 mode
+  (Routing) (Config) #monitor session 1 source interface 0/45 ?
+  <cr>                     Press Enter to execute the command.
+  rx                       Monitor ingress packets only.
+  tx                       Monitor egress packets only.
+  (Routing) (Config) #monitor session 1 source interface 0/45
+  (Routing) (Config) #monitor session 1 destination interface 0/46
+  (Routing) (Config) #exit
+
+
+Show the Port Mirroring Session
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To show the port mirroring session:
+
+.. code::
+
+  (Routing) #show monitor session 1
+
+.. code-block:: guess
+
+  Session ID   Admin Mode   Probe Port   Mirrored Port   Type
+  ----------   ----------   ----------   -------------   -----
+  1            Enable       0/46          0/45             Rx,Tx
+
+
+  Monitor session ID “1” - “1” is a hardware limitation.
+
+
+Show the Status of All Ports
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To show the port mirroring session:
+
+.. code::
+
+        (Routing) #show port all
+
+.. code-block:: guess
+
+                     Admin    Physical            Physical Link     Link     LACP
+    Intf    Type     Mode     Mode                Status   Status   Trap     Mode
+    ----    ----       ------   --------  --------  ------   ----     ----
+    0/1              Enable   Auto                Up       Enable   Enable
+    0/2              Enable   Auto                Down     Enable   Enable
+    0/3              Enable   Auto                Down     Enable   Enable
+
+     --More-- or (q)uit
+
+    0/40             Enable   Auto                Down     Enable   Enable
+    0/41             Enable   Auto                Down     Enable   Enable
+    0/42             Enable   Auto                Down     Enable   Enable
+    0/43             Enable   Auto                Down     Enable   Enable
+    0/44             Enable   Auto                Down     Enable   Enable
+    0/45   Mirror    Enable   Auto                Down     Enable   Enable
+    0/46   Probe     Enable   Auto                Down     Enable   Enable
+    0/47             Enable   Auto                Down     Enable   Enable
+    0/48             Enable   Auto                Down     Enable   Enable
+
+
+Show the Status of the Source and Destination Ports
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use this command for a specific port. The output shows whether the port is the mirror or the probe port, what is enabled or disabled on the port, etc.
+
+.. code::
+
+    (Ethernet Fabric) #show port 0/7
+
+.. code-block:: guess
+
+                     Admin    Physical  Physical  Link     Link     LACP
+    Intf   Type      Mode     Mode      Status    Status   Trap     Mode
+    ----   ----      ------   --------  --------  ------   ----     ----
+    0/7    Mirror    Enable   Auto                Down     Enable   Enable
+    (Ethernet Fabric) #show port 0/8
+                     Admin    Physical  Physical  Link     Link     LACP
+    Intf   Type      Mode     Mode      Status    Status   Trap     Mode
+    ----   ----      ------   --------  --------  ------   ----     ----
+    0/8    Probe     Enable   Auto                Down     Enable   Enable
+
+
+.. _port-mirroring-web:
+
+Configuring Port Mirroring via Web Interface
+--------------------------------------------
 

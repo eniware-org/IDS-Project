@@ -88,6 +88,7 @@
 <li class="toctree-l2"><a class="reference internal" href="1qu-Overview.html">Overview</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Flashing Routing Firmware</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3qu-SetupMirroring.html">Setup the Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3qu-SetupMirroring.html#configuring-port-mirroring">Configuring Port Mirroring</a></li>
 <li class="toctree-l2"><a class="reference internal" href="4qu-Troubleshooting.html">Troubleshooting</a></li>
 </ul>
 </li>
@@ -174,7 +175,7 @@
 <p>Using PuTTY connect to the serial port (console port) of the switch using the following parameters <code class="docutils literal notranslate"><span class="pre">115200,8,N,1</span></code>.
 Hit enter once and you should get the prompt. Use <code class="docutils literal notranslate"><span class="pre">admin</span></code> as a login name, the default password is blank. Hit enter again and you should get the <code class="docutils literal notranslate"><span class="pre">(Switching)&gt;</span></code> prompt. Then type the command <code class="docutils literal notranslate"><span class="pre">enable</span></code> and the switsh will go into command mode (the password is blank again).</p>
 <p>Use the below command to copy from your tftp server:</p>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>(Switching) #copy tftp://192.168.50.2/firmware.bin image2
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>(Switching) #copy tftp://192.168.50.2/firmware.bin image2
 
 Mode........................................... TFTP
 Set Server IP.................................. 192.168.50.2
@@ -203,7 +204,7 @@ File transfer operation completed successfully.
 <div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Switching</span><span class="p">)</span> <span class="c1">#show bootvar</span>
 </pre></div>
 </div>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>Image Descriptions
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>Image Descriptions
 
  image1 : default image
  image2 :
@@ -224,7 +225,7 @@ Images currently available on Flash
 <div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Switching</span><span class="p">)</span> <span class="c1">#boot system image2</span>
 </pre></div>
 </div>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>Activating image image2 ..
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>Activating image image2 ..
 
 (Switching) #show bootvar
 
@@ -246,7 +247,7 @@ Image Descriptions
 <div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Switching</span><span class="p">)</span> <span class="c1">#reload</span>
 </pre></div>
 </div>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>Are you sure you would like to reset the system? (y/n) y
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>Are you sure you would like to reset the system? (y/n) y
 
 
 System will now restart!
@@ -335,6 +336,10 @@ Applying Interface configuration, please wait ...
 </pre></div>
 </div>
 <p>The system is now running the new firmware.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is highly recommended to change the default admin password for the switch!</p>
+</div>
 </div>
 
 

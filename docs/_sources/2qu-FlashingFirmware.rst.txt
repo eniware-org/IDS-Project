@@ -16,7 +16,7 @@ Hit enter once and you should get the prompt. Use ``admin`` as a login name, the
 
 Use the below command to copy from your tftp server:
 
-.. code-block:: txt
+.. code-block:: guess
 
  (Switching) #copy tftp://192.168.50.2/firmware.bin image2
 
@@ -46,7 +46,7 @@ Now image2 slot contains 1.1.0.8 Router version:
 
     (Switching) #show bootvar
 
-.. code-block:: txt
+.. code-block:: guess
 
     Image Descriptions
 
@@ -71,7 +71,7 @@ Switch system to boot from “image2” firmware:
 
     (Switching) #boot system image2
 
-.. code-block:: txt
+.. code-block:: guess
 
     Activating image image2 ..
 
@@ -98,7 +98,7 @@ Now you should redoot the switch:
     (Switching) #reload
 
 
-.. code-block:: txt
+.. code-block:: guess
 
     Are you sure you would like to reset the system? (y/n) y
 
@@ -192,3 +192,5 @@ Login into the switch and check if the new firmware is running:
 
 
 The system is now running the new firmware.
+
+.. warning:: It is highly recommended to change the default admin password for the switch!
