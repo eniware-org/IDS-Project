@@ -38,7 +38,6 @@ Welcome to EniWARE IDS Project Documentation
    quanta
    ids
 
-
 Indices and tables
 ==================
 
@@ -46,3 +45,4 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
+`Last updated on:`

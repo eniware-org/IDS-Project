@@ -1,6 +1,8 @@
 Setup the Switch
 ================
 
+.. _setup-switch-IP:
+
 Setup Network Settings
 ----------------------
 
@@ -259,8 +261,36 @@ Use this command for a specific port. The output shows whether the port is the m
     0/46   Probe     Enable   Auto      1000 Full  Up      Enable   Enable
 
 
+
 .. _port-mirroring-web:
 
 Configuring Port Mirroring via Web Interface
 --------------------------------------------
 
+.. note:: Web interface needs to be enabled - please see the section :ref:`enablig-web`
+
+1. Open the logon page in your browser using the switch IP address (according to the network settings you made - see section :ref:`setup-switch-IP`). In this case the address is ``192.168.50.91``.
+For the user name type ``admin`` and fot the password - leave blank:
+
+.. image:: /images/web-interface-1.PNG
+   :alt: Web interface - login page
+
+2. After entering the Web interface, expand the System tree of the Navigation field to the ``System/Port/Multiple port mirroring``.
+
+.. image:: /images/web-interface-2.PNG
+   :alt: System/Port/Multiple port mirroring
+
+3. Setting a Multiple port mirroring is done by pressing a button ``Add source port`` and entering the following settings:
+
+* ``Source port = 0/45`` for this case;
+* ``Direction = Tx and Rx``
+
+The entered settings will be confirmed by clicking on the button ``Add``.
+
+.. image:: /images/web-interface-3.PNG
+   :alt: Setup source port
+
+4. The final step is to enable the port mirroring by setting the ``Mode = Enable``, set the ``Destination port = 0/4`` (according to this example) and confirmt by pressing the ``Submut`` button.
+
+.. image:: /images/web-interface-4.PNG
+   :alt: Setup destination port and activate the port mirroring
