@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Setup the Switch &mdash; IDS Project Documentation 1 documentation</title>
+  <title>Setup the Switch &mdash; IDS Project Documentation 1.0 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0
+                1.0
               </div>
             
           
@@ -109,7 +109,7 @@
 <li class="toctree-l2"><a class="reference internal" href="4qu-Troubleshooting.html">Troubleshooting</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="ids.html">IDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ids.html">NIDS Setup</a></li>
 </ul>
 
             
@@ -179,7 +179,7 @@
   <div class="section" id="setup-the-switch">
 <h1>Setup the Switch<a class="headerlink" href="#setup-the-switch" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="setup-network-settings">
-<h2>Setup Network Settings<a class="headerlink" href="#setup-network-settings" title="Permalink to this headline">¶</a></h2>
+<span id="setup-switch-ip"></span><h2>Setup Network Settings<a class="headerlink" href="#setup-network-settings" title="Permalink to this headline">¶</a></h2>
 <p>The next step is to check and setup network settings:</p>
 <div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Routing</span><span class="p">)</span> <span class="c1">#show network</span>
 </pre></div>
@@ -211,7 +211,7 @@ To turn on all ports:</p>
  Intf   Type    Mode    Mode       Status   Status  Trap    Mode   Timeout
 ------ ------ ------- ---------- ---------- ------ ------- ------ --------
 0/1           Enable   Auto       1000 Full  Up     Enable Enable long
-0/2           Enable   Auto                  Down   Enable Enable long
+0/2           Enable   Auto       100 Full   Up     Enable Enable long
 0/3           Enable   Auto                  Down   Enable Enable long
 0/4           Enable   Auto                  Down   Enable Enable long
 0/5           Enable   Auto                  Down   Enable Enable long
@@ -342,7 +342,7 @@ Monitor session ID “1” - “1” is a hardware limitation.
  Intf   Type    Mode    Mode       Status   Status  Trap    Mode   Timeout
 ------ ------ ------- ---------- ---------- ------ ------- ------ --------
 0/1           Enable   Auto       1000 Full  Up     Enable Enable long
-0/2           Enable   Auto                  Down   Enable Enable long
+0/2           Enable   Auto       100 Full   Up     Enable Enable long
 0/3           Enable   Auto                  Down   Enable Enable long
 
  --More-- or (q)uit
@@ -384,6 +384,30 @@ Intf   Type      Mode     Mode      Status    Status   Trap     Mode
 </div>
 <div class="section" id="configuring-port-mirroring-via-web-interface">
 <span id="port-mirroring-web"></span><h2>Configuring Port Mirroring via Web Interface<a class="headerlink" href="#configuring-port-mirroring-via-web-interface" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Web interface needs to be enabled - please see the section <a class="reference internal" href="#enablig-web"><span class="std std-ref">Enabling WEB Inteface</span></a></p>
+</div>
+<p>1. Open the logon page in your browser using the switch IP address (according to the network settings you made - see section <a class="reference internal" href="#setup-switch-ip"><span class="std std-ref">Setup Network Settings</span></a>). In this case the address is <code class="docutils literal notranslate"><span class="pre">192.168.50.91</span></code>.
+For the user name type <code class="docutils literal notranslate"><span class="pre">admin</span></code> and fot the password - leave blank:</p>
+<img alt="Web interface - login page" src="_images/web-interface-1.PNG" />
+<ol class="arabic simple" start="2">
+<li>After entering the Web interface, expand the System tree of the Navigation field to the <code class="docutils literal notranslate"><span class="pre">System/Port/Multiple</span> <span class="pre">port</span> <span class="pre">mirroring</span></code>.</li>
+</ol>
+<img alt="System/Port/Multiple port mirroring" src="_images/web-interface-2.PNG" />
+<ol class="arabic simple" start="3">
+<li>Setting a Multiple port mirroring is done by pressing a button <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">source</span> <span class="pre">port</span></code> and entering the following settings:</li>
+</ol>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">Source</span> <span class="pre">port</span> <span class="pre">=</span> <span class="pre">0/45</span></code> for this case;</li>
+<li><code class="docutils literal notranslate"><span class="pre">Direction</span> <span class="pre">=</span> <span class="pre">Tx</span> <span class="pre">and</span> <span class="pre">Rx</span></code></li>
+</ul>
+<p>The entered settings will be confirmed by clicking on the button <code class="docutils literal notranslate"><span class="pre">Add</span></code>.</p>
+<img alt="Setup source port" src="_images/web-interface-3.PNG" />
+<ol class="arabic simple" start="4">
+<li>The final step is to enable the port mirroring by setting the <code class="docutils literal notranslate"><span class="pre">Mode</span> <span class="pre">=</span> <span class="pre">Enable</span></code>, set the <code class="docutils literal notranslate"><span class="pre">Destination</span> <span class="pre">port</span> <span class="pre">=</span> <span class="pre">0/4</span></code> (according to this example) and confirmt by pressing the <code class="docutils literal notranslate"><span class="pre">Submut</span></code> button.</li>
+</ol>
+<img alt="Setup destination port and activate the port mirroring" src="_images/web-interface-4.PNG" />
 </div>
 </div>
 
@@ -429,7 +453,7 @@ Intf   Type      Mode     Mode      Status    Status   Trap     Mode
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1',
+            VERSION:'1.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

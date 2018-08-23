@@ -39,10 +39,46 @@ The three IDS detection methodologies are typically used to detect incidents.
 * Stateful Protocol Analysis compares predetermined profiles of generally accepted definitions for benign protocol activity for each protocol state against observed events in order to identify deviations.
 
 
-EniWARE Implementation
--------------------------------
+EniWARE Implementation of NIDS
+----------------------------------------------------
 
+This documentation is demonstrated а **network intrusion detection system (NIDS)**.
+NIDS is deployed at a strategic point or points within the network, where it can monitor inbound and outbound traffic to and from all the devices on the network.
+You can selectively enforce various attack detection and prevention techniques on the network traffic passing through your chosen device. You can define policy rules to match a section of traffic based on a zone, a network, or an application, and then take active or passive preventative actions on that traffic.
 
-EniWARE uses its **???????????** for intrusion detection services. You can selectively enforce various attack detection and prevention techniques on the network traffic passing through your chosen **???? device**. You can define policy rules to match a section of traffic based on a zone, a network, or an application, and then take active or passive preventative actions on that traffic.
+**The main idea** in this particular case is to monitor and analyze traffic from an industrial controller. Data is collected, analyzed and sent to a remote server where it is processed and visualized.
 
+The network architecture shown in the figure below is used for demonstration purposes.
 
+.. image:: /images/network-diagram.png
+   :alt: EniWARE network diagram with NDIS
+
+The NIDS is implementet by using **Switch 2** which is Quanta LB4M with appropriate firmware installed (see :ref:`flashing-firmware`), and **NIDS Server**.
+
+**Switch 2** listens to the **EDAM module** traffic and sends it for analysis to the **NIDS Server**.
+
+The **NIDS Server** is implemented on a virtual machine with `Ubuntu 16.04 LTS Server installation <http://releases.ubuntu.com/16.04/>`_ and it uses the following software tools:
+
+* Snort;
+* IDS Tools;
+* Logstash.
+
+`Snort <https://www.snort.org/>`_ is a free open source network intrusion detection system.
+Snort's open source network-based intrusion detection system has the ability to perform real-time traffic analysis and packet logging on Internet Protocol (IP) networks. Snort performs protocol analysis, content searching and matching.
+Snort is configured in network intrusion detection mode. In this mode, the program will monitor network traffic and analyze it against a rule set defined by the user. The program will then perform a specific action based on what has been identified.
+Snort can be downloaded from `here <https://www.snort.org/downloads>`_.
+More information can be found in the `Snort Documentation <https://www.snort.org/documents#OfficialDocumentation>`_.
+
+**IDS Tools** will be described later.
+
+`Logstash <https://www.elastic.co/products/logstash>`_ is an open source tool for collecting, parsing, and storing logs for future use. For Logstash Download, please visit `download page <https://www.elastic.co/downloads/logstash>`_.  More information can be found in the `Logstash documentation <https://www.elastic.co/guide/en/logstash/6.3/introduction.html>`_.
+
+`EDAM 9017 (Ethernet to Analog I/O Modules ) <http://www.impulse-corp.co.uk/products/industrial-automation/industrial-analog-i~o/distributed-analog-i~o-modules/ethernet-to-analog-i~o-modules/edam_9017.htm>`_ is a compact and lightweight data acquisition module which communicates via Modbus over Ethernet TCP/IP connection. For more information about EDMA 9017 -
+
+Remote data processing and visualization is performed by the Elasticsearch and Kibana installed on the remote server (**EK Server** in the network architecture diagram).
+
+`Elasticsearch <https://www.elastic.co/products/elasticsearch>`_ is a distributed, RESTful search and analytics engine.
+
+`Kibana <https://www.elastic.co/products/kibana>`_ is a web interface that can be used to search and view the logs that Logstash has indexed. Kibana lets you visualize your Elasticsearch data and navigate the Elastic Stack.
+
+Elasticsearch, Logstash, and Kibana, when used together is known as an ELK stack.

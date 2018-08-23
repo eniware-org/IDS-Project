@@ -1,3 +1,5 @@
+.. _flashing-firmware:
+
 Flashing Routing Firmware
 =========================
 
