@@ -7,7 +7,7 @@ Switch Description
 ------------------
 
 The Quanta LB4M is a modular Gigabit Ethernet backbone switch designed for adaptability and
-scalability. The Switch can utilize up to 48 Gigabit Ethernet ports (SFP?) to function as a central
+scalability. The Switch can utilize up to 48 Gigabit Ethernet ports to function as a central
 distribution hub for other switches, switch groups, or routers. The one built-in 1000/100/10
 Ethernet ports for out of service. The LB4M also provides SFP+ interfaces for 10-Giga port on
 the daughter board. The number of 10-Giga ports depend on selecting daughter board.
