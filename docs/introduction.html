@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Introduction &mdash; IDS Project Documentation 1 documentation</title>
+  <title>Introduction &mdash; IDS Project Documentation 1.0 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0
+                1.0
               </div>
             
           
@@ -87,11 +87,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#what-is-ids">What is IDS?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-can-you-do-with-ids">What Can You Do with IDS?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-does-ids-work">How Does IDS Work?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#eniware-implementation">EniWARE Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#eniware-implementation-of-nids">EniWARE Implementation of NIDS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="quanta.html">Quanta LB4M Switch Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ids.html">IDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ids.html">NIDS Setup</a></li>
 </ul>
 
             
@@ -182,9 +182,34 @@
 <li>Stateful Protocol Analysis compares predetermined profiles of generally accepted definitions for benign protocol activity for each protocol state against observed events in order to identify deviations.</li>
 </ul>
 </div>
-<div class="section" id="eniware-implementation">
-<h2>EniWARE Implementation<a class="headerlink" href="#eniware-implementation" title="Permalink to this headline">¶</a></h2>
-<p>EniWARE uses its <strong>???????????</strong> for intrusion detection services. You can selectively enforce various attack detection and prevention techniques on the network traffic passing through your chosen <strong>???? device</strong>. You can define policy rules to match a section of traffic based on a zone, a network, or an application, and then take active or passive preventative actions on that traffic.</p>
+<div class="section" id="eniware-implementation-of-nids">
+<h2>EniWARE Implementation of NIDS<a class="headerlink" href="#eniware-implementation-of-nids" title="Permalink to this headline">¶</a></h2>
+<p>This documentation is demonstrated а <strong>network intrusion detection system (NIDS)</strong>.
+NIDS is deployed at a strategic point or points within the network, where it can monitor inbound and outbound traffic to and from all the devices on the network.
+You can selectively enforce various attack detection and prevention techniques on the network traffic passing through your chosen device. You can define policy rules to match a section of traffic based on a zone, a network, or an application, and then take active or passive preventative actions on that traffic.</p>
+<p><strong>The main idea</strong> in this particular case is to monitor and analyze traffic from an industrial controller. Data is collected, analyzed and sent to a remote server where it is processed and visualized.</p>
+<p>The network architecture shown in the figure below is used for demonstration purposes.</p>
+<img alt="EniWARE network diagram with NDIS" src="_images/network-diagram.png" />
+<p>The NIDS is implementet by using <strong>Switch 2</strong> which is Quanta LB4M with appropriate firmware installed (see <a class="reference internal" href="2qu-FlashingFirmware.html#flashing-firmware"><span class="std std-ref">Flashing Routing Firmware</span></a>), and <strong>NIDS Server</strong>.</p>
+<p><strong>Switch 2</strong> listens to the <strong>EDAM module</strong> traffic and sends it for analysis to the <strong>NIDS Server</strong>.</p>
+<p>The <strong>NIDS Server</strong> is implemented on a virtual machine with <a class="reference external" href="http://releases.ubuntu.com/16.04/">Ubuntu 16.04 LTS Server installation</a> and it uses the following software tools:</p>
+<ul class="simple">
+<li>Snort;</li>
+<li>IDS Tools;</li>
+<li>Logstash.</li>
+</ul>
+<p><a class="reference external" href="https://www.snort.org/">Snort</a> is a free open source network intrusion detection system.
+Snort’s open source network-based intrusion detection system has the ability to perform real-time traffic analysis and packet logging on Internet Protocol (IP) networks. Snort performs protocol analysis, content searching and matching.
+Snort is configured in network intrusion detection mode. In this mode, the program will monitor network traffic and analyze it against a rule set defined by the user. The program will then perform a specific action based on what has been identified.
+Snort can be downloaded from <a class="reference external" href="https://www.snort.org/downloads">here</a>.
+More information can be found in the <a class="reference external" href="https://www.snort.org/documents#OfficialDocumentation">Snort Documentation</a>.</p>
+<p><strong>IDS Tools</strong> will be described later.</p>
+<p><a class="reference external" href="https://www.elastic.co/products/logstash">Logstash</a> is an open source tool for collecting, parsing, and storing logs for future use. For Logstash Download, please visit <a class="reference external" href="https://www.elastic.co/downloads/logstash">download page</a>.  More information can be found in the <a class="reference external" href="https://www.elastic.co/guide/en/logstash/6.3/introduction.html">Logstash documentation</a>.</p>
+<p><a class="reference external" href="http://www.impulse-corp.co.uk/products/industrial-automation/industrial-analog-i~o/distributed-analog-i~o-modules/ethernet-to-analog-i~o-modules/edam_9017.htm">EDAM 9017 (Ethernet to Analog I/O Modules )</a> is a compact and lightweight data acquisition module which communicates via Modbus over Ethernet TCP/IP connection. For more information about EDMA 9017 -</p>
+<p>Remote data processing and visualization is performed by the Elasticsearch and Kibana installed on the remote server (<strong>EK Server</strong> in the network architecture diagram).</p>
+<p><a class="reference external" href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a> is a distributed, RESTful search and analytics engine.</p>
+<p><a class="reference external" href="https://www.elastic.co/products/kibana">Kibana</a> is a web interface that can be used to search and view the logs that Logstash has indexed. Kibana lets you visualize your Elasticsearch data and navigate the Elastic Stack.</p>
+<p>Elasticsearch, Logstash, and Kibana, when used together is known as an ELK stack.</p>
 </div>
 </div>
 
@@ -230,7 +255,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1',
+            VERSION:'1.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

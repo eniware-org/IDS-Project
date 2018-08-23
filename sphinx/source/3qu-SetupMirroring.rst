@@ -46,7 +46,7 @@ To turn on all ports:
      Intf   Type    Mode    Mode       Status   Status  Trap    Mode   Timeout
     ------ ------ ------- ---------- ---------- ------ ------- ------ --------
     0/1           Enable   Auto       1000 Full  Up     Enable Enable long
-    0/2           Enable   Auto                  Down   Enable Enable long
+    0/2           Enable   Auto       100 Full   Up     Enable Enable long
     0/3           Enable   Auto                  Down   Enable Enable long
     0/4           Enable   Auto                  Down   Enable Enable long
     0/5           Enable   Auto                  Down   Enable Enable long
@@ -214,7 +214,7 @@ To show the port mirroring session:
      Intf   Type    Mode    Mode       Status   Status  Trap    Mode   Timeout
     ------ ------ ------- ---------- ---------- ------ ------- ------ --------
     0/1           Enable   Auto       1000 Full  Up     Enable Enable long
-    0/2           Enable   Auto                  Down   Enable Enable long
+    0/2           Enable   Auto       100 Full   Up     Enable Enable long
     0/3           Enable   Auto                  Down   Enable Enable long
 
      --More-- or (q)uit
