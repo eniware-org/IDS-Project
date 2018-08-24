@@ -1,8 +1,19 @@
+.. _nids-setup:
+
 NIDS Setup
 ==========
 
-* Ubintu 16.04 Server Installation
-* Snort - Network Intrusion Detection & Prevention System
+In this chapter it will be described how to setup :ref:`NIDS Server <network-diagram>`.
+The NIDS Server setup requires installing and configuring the following:
+
+* Ubintu 16.04 LTS Server
+* Snort
 * IDS Tools
 * Logstash
 * Importing the data into Elasticsearch and Kibana
+
+.. toctree::
+   :maxdepth: 3
+
+   1ids-nids-install
+   2ids-nids-config

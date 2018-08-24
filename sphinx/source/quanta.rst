@@ -3,6 +3,8 @@
 Quanta LB4M Switch Setup
 =========================
 
+In this chapter it will be described how to setup and configure :ref:`Switch 2 <network-diagram>`, which is the basic hardware element in the NIDS system architecture (see :ref:`eniware-nids`).
+
 .. toctree::
    :maxdepth: 3
    

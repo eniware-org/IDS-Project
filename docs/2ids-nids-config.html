@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>NIDS Setup &mdash; IDS Project Documentation 1.0 documentation</title>
+  <title>Snort Installation and Configuration &mdash; IDS Project Documentation 1.0 documentation</title>
   
 
   
@@ -28,8 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Install the core components of the NIDS Server" href="1ids-nids-install.html" />
-    <link rel="prev" title="Troubleshooting" href="4qu-Troubleshooting.html" /> 
+    <link rel="prev" title="Install the core components of the NIDS Server" href="1ids-nids-install.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -85,9 +84,9 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quanta.html">Quanta LB4M Switch Setup</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">NIDS Setup</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="ids.html">NIDS Setup</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="1ids-nids-install.html">Install the core components of the NIDS Server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2ids-nids-config.html">Snort Installation and Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Snort Installation and Configuration</a></li>
 </ul>
 </li>
 </ul>
@@ -135,13 +134,15 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>NIDS Setup</li>
+          <li><a href="ids.html">NIDS Setup</a> &raquo;</li>
+        
+      <li>Snort Installation and Configuration</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/ids.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/2ids-nids-config.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -154,33 +155,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="nids-setup">
-<span id="id1"></span><h1>NIDS Setup<a class="headerlink" href="#nids-setup" title="Permalink to this headline">¶</a></h1>
-<p>In this chapter it will be described how to setup <a class="reference internal" href="introduction.html#network-diagram"><span class="std std-ref">NIDS Server</span></a>.
-The NIDS Server setup requires installing and configuring the following:</p>
-<ul class="simple">
-<li>Ubintu 16.04 LTS Server</li>
-<li>Snort</li>
-<li>IDS Tools</li>
-<li>Logstash</li>
-<li>Importing the data into Elasticsearch and Kibana</li>
-</ul>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="1ids-nids-install.html">Install the core components of the NIDS Server</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="1ids-nids-install.html#ubuntu-16-04-lts-server-installation">Ubuntu 16.04 LTS Server Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="1ids-nids-install.html#install-the-core-components">Install the Core Components</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="1ids-nids-install.html#changing-the-network-interfaces-names-back-to-ethx">Changing the network interfaces names back to ethX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1ids-nids-install.html#setting-up-the-network-interfaces-for-snort">Setting up the Network Interfaces for Snort</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1ids-nids-install.html#install-ssh-server">Install SSH server</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1ids-nids-install.html#setting-up-key-based-ssh-login-instead-of-password-based">???? Setting up key-based SSH login instead of password-based ????</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="2ids-nids-config.html">Snort Installation and Configuration</a></li>
-</ul>
-</div>
+  <div class="section" id="snort-installation-and-configuration">
+<span id="snort-install"></span><h1>Snort Installation and Configuration<a class="headerlink" href="#snort-installation-and-configuration" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -191,10 +167,8 @@ The NIDS Server setup requires installing and configuring the following:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="1ids-nids-install.html" class="btn btn-neutral float-right" title="Install the core components of the NIDS Server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="4qu-Troubleshooting.html" class="btn btn-neutral" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="1ids-nids-install.html" class="btn btn-neutral" title="Install the core components of the NIDS Server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
