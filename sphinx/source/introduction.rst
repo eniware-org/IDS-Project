@@ -39,10 +39,12 @@ The three IDS detection methodologies are typically used to detect incidents.
 * Stateful Protocol Analysis compares predetermined profiles of generally accepted definitions for benign protocol activity for each protocol state against observed events in order to identify deviations.
 
 
+.. _eniware-nids:
+
 EniWARE Implementation of NIDS
 ----------------------------------------------------
 
-This documentation is demonstrated а **network intrusion detection system (NIDS)**.
+In this documentation is demonstrated а **network intrusion detection system (NIDS)**.
 NIDS is deployed at a strategic point or points within the network, where it can monitor inbound and outbound traffic to and from all the devices on the network.
 You can selectively enforce various attack detection and prevention techniques on the network traffic passing through your chosen device. You can define policy rules to match a section of traffic based on a zone, a network, or an application, and then take active or passive preventative actions on that traffic.
 
@@ -50,8 +52,12 @@ You can selectively enforce various attack detection and prevention techniques o
 
 The network architecture shown in the figure below is used for demonstration purposes.
 
-.. image:: /images/network-diagram.png
+
+.. _network-diagram:
+
+.. figure:: /images/network-diagram.png
    :alt: EniWARE network diagram with NDIS
+
 
 The NIDS is implementet by using **Switch 2** which is Quanta LB4M with appropriate firmware installed (see :ref:`flashing-firmware`), and **NIDS Server**.
 
@@ -73,9 +79,9 @@ More information can be found in the `Snort Documentation <https://www.snort.org
 
 `Logstash <https://www.elastic.co/products/logstash>`_ is an open source tool for collecting, parsing, and storing logs for future use. For Logstash Download, please visit `download page <https://www.elastic.co/downloads/logstash>`_.  More information can be found in the `Logstash documentation <https://www.elastic.co/guide/en/logstash/6.3/introduction.html>`_.
 
-`EDAM 9017 (Ethernet to Analog I/O Modules ) <http://www.impulse-corp.co.uk/products/industrial-automation/industrial-analog-i~o/distributed-analog-i~o-modules/ethernet-to-analog-i~o-modules/edam_9017.htm>`_ is a compact and lightweight data acquisition module which communicates via Modbus over Ethernet TCP/IP connection. For more information about EDMA 9017 -
+`EDAM 9017 (Ethernet to Analog I/O Modules ) <http://www.impulse-corp.co.uk/products/industrial-automation/industrial-analog-i~o/distributed-analog-i~o-modules/ethernet-to-analog-i~o-modules/edam_9017.htm>`_ is a compact and lightweight data acquisition module which communicates via Modbus over Ethernet TCP/IP connection.
 
-Remote data processing and visualization is performed by the Elasticsearch and Kibana installed on the remote server (**EK Server** in the network architecture diagram).
+Remote data processing and visualization is performed by the Elasticsearch and Kibana installed on the remote server (**EK Server** in the :ref:`network architecture diagram <network-diagram>`).
 
 `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_ is a distributed, RESTful search and analytics engine.
 

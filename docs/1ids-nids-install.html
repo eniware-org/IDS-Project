@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Install the core components of the NIDS Server &mdash; IDS Project Documentation 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Snort Installation and Configuration" href="2ids-nids-config.html" />
+    <link rel="prev" title="NIDS Setup" href="ids.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> IDS Project Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quanta.html">Quanta LB4M Switch Setup</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="ids.html">NIDS Setup</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Install the core components of the NIDS Server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ubuntu-16-04-lts-server-installation">Ubuntu 16.04 LTS Server Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-core-components">Install the Core Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#changing-the-network-interfaces-names-back-to-ethx">Changing the network interfaces names back to ethX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-up-the-network-interfaces-for-snort">Setting up the Network Interfaces for Snort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-ssh-server">Install SSH server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-up-key-based-ssh-login-instead-of-password-based">???? Setting up key-based SSH login instead of password-based ????</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2ids-nids-config.html">Snort Installation and Configuration</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IDS Project Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="ids.html">NIDS Setup</a> &raquo;</li>
+        
+      <li>Install the core components of the NIDS Server</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/1ids-nids-install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="install-the-core-components-of-the-nids-server">
+<span id="nids-install"></span><h1>Install the core components of the NIDS Server<a class="headerlink" href="#install-the-core-components-of-the-nids-server" title="Permalink to this headline">¶</a></h1>
+<p><strong>Requirements:</strong></p>
+<ul class="simple">
+<li>Freshly installed Ubuntu 16.04 LTS Server Edition</li>
+<li>Server with two network interfaces</li>
+</ul>
+<div class="section" id="ubuntu-16-04-lts-server-installation">
+<span id="ubuntu-install"></span><h2>Ubuntu 16.04 LTS Server Installation<a class="headerlink" href="#ubuntu-16-04-lts-server-installation" title="Permalink to this headline">¶</a></h2>
+<p>The first step is to install <a class="reference external" href="http://releases.ubuntu.com/16.04/">Ubuntu 16.04 LTS Server Edition</a>.
+The complete installation guide can be found here: <a class="reference external" href="https://help.ubuntu.com/16.04/serverguide/index.html">Ubuntu Server Guide</a>.</p>
+</div>
+<div class="section" id="install-the-core-components">
+<span id="core-install"></span><h2>Install the Core Components<a class="headerlink" href="#install-the-core-components" title="Permalink to this headline">¶</a></h2>
+<p>Once a server system is already installed, it can proceed to install the core components.
+To do this, log on to the server and do the following:</p>
+<p>Perform an update after logging in for the first time:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">upgrade</span>
+</pre></div>
+</div>
+<div class="section" id="changing-the-network-interfaces-names-back-to-ethx">
+<h3>Changing the network interfaces names back to ethX<a class="headerlink" href="#changing-the-network-interfaces-names-back-to-ethx" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This step is purely for convenience. You can skip this step if you want, but in this case don’t forget to change the interfaces names accordingly to your system.</p>
+</div>
+<p>Open the GRUB config file and find the line which starts with <code class="docutils literal notranslate"><span class="pre">GRUB_CMDLINE_LINUX</span></code> and add <code class="docutils literal notranslate"><span class="pre">&quot;net.ifnames=0</span> <span class="pre">biosdevname=0&quot;</span></code> to it:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">grub</span>
+</pre></div>
+</div>
+<p>The result should be something like:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s2">&quot;net.ifnames=0 biosdevname=0&quot;</span>
+</pre></div>
+</div>
+<p>After that update GRUB and reboot Ubuntu:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">update</span><span class="o">-</span><span class="n">grub</span>
+<span class="n">sudo</span> <span class="n">reboot</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-up-the-network-interfaces-for-snort">
+<span id="net-int-snort"></span><h3>Setting up the Network Interfaces for Snort<a class="headerlink" href="#setting-up-the-network-interfaces-for-snort" title="Permalink to this headline">¶</a></h3>
+<p>One of the network interfaces is going to be used for <em>managment and remote access</em>, so it will be configured with a static IP address. The other network interface is going to be used by Snort for <em>inspection of the mirrored traffic</em>. The interface needs to operate in promiscuous mode for Snort to be able to use it.
+In this example <code class="docutils literal notranslate"><span class="pre">eth1</span></code> is used for managment and <code class="docutils literal notranslate"><span class="pre">eth9</span></code> is used by Snort.</p>
+<p>Your <code class="docutils literal notranslate"><span class="pre">/etc/network/interface</span></code> file should look something like:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">network</span><span class="o">/</span><span class="n">interfaces</span>
+</pre></div>
+</div>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">auto</span> <span class="n">eth1</span>
+<span class="n">iface</span> <span class="n">eth1</span> <span class="n">inet</span> <span class="n">static</span>
+<span class="n">address</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">50.21</span>
+<span class="n">netmask</span> <span class="mf">255.255</span><span class="o">.</span><span class="mf">255.0</span>
+<span class="n">gateway</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">50.1</span>
+<span class="n">dns</span><span class="o">-</span><span class="n">nameservers</span> <span class="mf">8.8</span><span class="o">.</span><span class="mf">8.8</span> <span class="mf">4.4</span><span class="o">.</span><span class="mf">4.4</span>
+
+<span class="n">auto</span> <span class="n">eth9</span>
+<span class="n">iface</span> <span class="n">eth9</span> <span class="n">inet</span> <span class="n">manual</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-ssh-server">
+<h3>Install SSH server<a class="headerlink" href="#install-ssh-server" title="Permalink to this headline">¶</a></h3>
+<p>Install SSH server for remote access to the Snort machine:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">openssh</span><span class="o">-</span><span class="n">server</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>It is required to setup the SSH client not to forward your locale to the remote host. This is done in order to avoid side effects on scripts and programs that rely on locale being the default for the machine. This is achieved with the following command:
+.. code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;/SendEnv/ s/^#*/#/&#39;</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span><span class="n">ssh_config</span>
+</pre></div>
+</div>
+<p class="last">You must log out and login again for the changes to take place.</p>
+</div>
+</div>
+<div class="section" id="setting-up-key-based-ssh-login-instead-of-password-based">
+<h3>???? Setting up key-based SSH login instead of password-based ????<a class="headerlink" href="#setting-up-key-based-ssh-login-instead-of-password-based" title="Permalink to this headline">¶</a></h3>
+<p>Logstash needs Java version 8 at least</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">openjdk</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">jre</span>
+</pre></div>
+</div>
+<p>To install the script that is going to convert the Snort log files to JSON enter the following:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">idstools</span>
+</pre></div>
+</div>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">snort</span>
+</pre></div>
+</div>
+<p>To install Logstash 6.3 first we need to add  it’s repository to the repositories list:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="o">-</span><span class="n">qO</span> <span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">artifacts</span><span class="o">.</span><span class="n">elastic</span><span class="o">.</span><span class="n">co</span><span class="o">/</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">elasticsearch</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">key</span> <span class="n">add</span> <span class="o">-</span>
+<span class="n">echo</span> <span class="s2">&quot;deb https://artifacts.elastic.co/packages/6.x/apt stable main&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">-</span><span class="n">a</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">sources</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">elastic</span><span class="o">-</span><span class="mf">6.3</span><span class="o">.</span><span class="n">list</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+</pre></div>
+</div>
+<p>After that Logstash can be isntalled:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">logstash</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="2ids-nids-config.html" class="btn btn-neutral float-right" title="Snort Installation and Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ids.html" class="btn btn-neutral" title="NIDS Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, EniWARE.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
