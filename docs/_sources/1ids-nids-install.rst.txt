@@ -1,6 +1,6 @@
 .. _nids-install:
 
-Install the core components of the NIDS Server
+Install the Core Components of the NIDS Server
 ==============================================
 
 **Requirements:**
@@ -35,7 +35,7 @@ Perform an update after logging in for the first time:
     sudo apt-get update && sudo apt-get upgrade
 
 
-Changing the network interfaces names back to ethX
+Changing the Network Interfaces Names Back to ethX
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
@@ -89,7 +89,7 @@ Your ``/etc/network/interface`` file should look something like:
 
 
 
-Install SSH server
+Install SSH Server
 ^^^^^^^^^^^^^^^^^^
 
 Install SSH server for remote access to the Snort machine:
@@ -110,10 +110,11 @@ Install SSH server for remote access to the Snort machine:
 
 
 
-???? Setting up key-based SSH login instead of password-based ????
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Setting up Key-based SSH Login Instead of Password-based
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Logstash needs Java version 8 at least
+.. note::
+    Logstash needs Java version 8 at least.
 
 .. code::
 
