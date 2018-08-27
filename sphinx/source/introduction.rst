@@ -66,7 +66,7 @@ The NIDS is implementet by using **Switch 2** which is Quanta LB4M with appropri
 The **NIDS Server** is implemented on a virtual machine with `Ubuntu 16.04 LTS Server installation <http://releases.ubuntu.com/16.04/>`_ and it uses the following software tools:
 
 * Snort;
-* IDS Tools;
+* idstools;
 * Logstash.
 
 `Snort <https://www.snort.org/>`_ is a free open source network intrusion detection system.
@@ -75,9 +75,9 @@ Snort is configured in network intrusion detection mode. In this mode, the progr
 Snort can be downloaded from `here <https://www.snort.org/downloads>`_.
 More information can be found in the `Snort Documentation <https://www.snort.org/documents#OfficialDocumentation>`_.
 
-**IDS Tools** will be described later.
+`idstools <https://pypi.org/project/idstools/>`_ is a Python library for working with Snort and Suricata logs and rules. Since the "native" Snort log format is ``unified2``, it is necessary to convert it to JSON. For this purpose, the ``u2json`` tool is used (a stript, which is part of the **idstools**). More information can be found in the `official documentation of the idstool project <https://idstools.readthedocs.io/en/latest/index.html>`_.
 
-`Logstash <https://www.elastic.co/products/logstash>`_ is an open source tool for collecting, parsing, and storing logs for future use. For Logstash Download, please visit `download page <https://www.elastic.co/downloads/logstash>`_.  More information can be found in the `Logstash documentation <https://www.elastic.co/guide/en/logstash/6.3/introduction.html>`_.
+`Logstash <https://www.elastic.co/products/logstash>`_ is an open source tool for collecting, parsing, and storing logs (JSON files from Snort in this example) for future use. For Logstash Download, please visit `download page <https://www.elastic.co/downloads/logstash>`_.  More information can be found in the `Logstash documentation <https://www.elastic.co/guide/en/logstash/6.3/introduction.html>`_.
 
 `EDAM 9017 (Ethernet to Analog I/O Modules ) <http://www.impulse-corp.co.uk/products/industrial-automation/industrial-analog-i~o/distributed-analog-i~o-modules/ethernet-to-analog-i~o-modules/edam_9017.htm>`_ is a compact and lightweight data acquisition module which communicates via Modbus over Ethernet TCP/IP connection.
 

@@ -197,7 +197,7 @@ You can selectively enforce various attack detection and prevention techniques o
 <p>The <strong>NIDS Server</strong> is implemented on a virtual machine with <a class="reference external" href="http://releases.ubuntu.com/16.04/">Ubuntu 16.04 LTS Server installation</a> and it uses the following software tools:</p>
 <ul class="simple">
 <li>Snort;</li>
-<li>IDS Tools;</li>
+<li>idstools;</li>
 <li>Logstash.</li>
 </ul>
 <p><a class="reference external" href="https://www.snort.org/">Snort</a> is a free open source network intrusion detection system.
@@ -205,8 +205,8 @@ Snort’s open source network-based intrusion detection system has the ability t
 Snort is configured in network intrusion detection mode. In this mode, the program will monitor network traffic and analyze it against a rule set defined by the user. The program will then perform a specific action based on what has been identified.
 Snort can be downloaded from <a class="reference external" href="https://www.snort.org/downloads">here</a>.
 More information can be found in the <a class="reference external" href="https://www.snort.org/documents#OfficialDocumentation">Snort Documentation</a>.</p>
-<p><strong>IDS Tools</strong> will be described later.</p>
-<p><a class="reference external" href="https://www.elastic.co/products/logstash">Logstash</a> is an open source tool for collecting, parsing, and storing logs for future use. For Logstash Download, please visit <a class="reference external" href="https://www.elastic.co/downloads/logstash">download page</a>.  More information can be found in the <a class="reference external" href="https://www.elastic.co/guide/en/logstash/6.3/introduction.html">Logstash documentation</a>.</p>
+<p><a class="reference external" href="https://pypi.org/project/idstools/">idstools</a> is a Python library for working with Snort and Suricata logs and rules. Since the “native” Snort log format is <code class="docutils literal notranslate"><span class="pre">unified2</span></code>, it is necessary to convert it to JSON. For this purpose, the <code class="docutils literal notranslate"><span class="pre">u2json</span></code> tool is used (a stript, which is part of the <strong>idstools</strong>). More information can be found in the <a class="reference external" href="https://idstools.readthedocs.io/en/latest/index.html">official documentation of the idstool project</a>.</p>
+<p><a class="reference external" href="https://www.elastic.co/products/logstash">Logstash</a> is an open source tool for collecting, parsing, and storing logs (JSON files from Snort in this example) for future use. For Logstash Download, please visit <a class="reference external" href="https://www.elastic.co/downloads/logstash">download page</a>.  More information can be found in the <a class="reference external" href="https://www.elastic.co/guide/en/logstash/6.3/introduction.html">Logstash documentation</a>.</p>
 <p><a class="reference external" href="http://www.impulse-corp.co.uk/products/industrial-automation/industrial-analog-i~o/distributed-analog-i~o-modules/ethernet-to-analog-i~o-modules/edam_9017.htm">EDAM 9017 (Ethernet to Analog I/O Modules )</a> is a compact and lightweight data acquisition module which communicates via Modbus over Ethernet TCP/IP connection.</p>
 <p>Remote data processing and visualization is performed by the Elasticsearch and Kibana installed on the remote server (<strong>EK Server</strong> in the <a class="reference internal" href="#network-diagram"><span class="std std-ref">network architecture diagram</span></a>).</p>
 <p><a class="reference external" href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a> is a distributed, RESTful search and analytics engine.</p>

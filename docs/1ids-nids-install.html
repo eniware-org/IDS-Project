@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Install the core components of the NIDS Server &mdash; IDS Project Documentation 1.0 documentation</title>
+  <title>Install the Core Components of the NIDS Server &mdash; IDS Project Documentation 1.0 documentation</title>
   
 
   
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Snort Installation and Configuration" href="2ids-nids-config.html" />
+    <link rel="next" title="NIDS Server Configuration" href="2ids-nids-config.html" />
     <link rel="prev" title="NIDS Setup" href="ids.html" /> 
 
   
@@ -86,18 +86,18 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quanta.html">Quanta LB4M Switch Setup</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="ids.html">NIDS Setup</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Install the core components of the NIDS Server</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Install the Core Components of the NIDS Server</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#ubuntu-16-04-lts-server-installation">Ubuntu 16.04 LTS Server Installation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#install-the-core-components">Install the Core Components</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#changing-the-network-interfaces-names-back-to-ethx">Changing the network interfaces names back to ethX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-the-network-interfaces-names-back-to-ethx">Changing the Network Interfaces Names Back to ethX</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#setting-up-the-network-interfaces-for-snort">Setting up the Network Interfaces for Snort</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#install-ssh-server">Install SSH server</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#setting-up-key-based-ssh-login-instead-of-password-based">???? Setting up key-based SSH login instead of password-based ????</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-ssh-server">Install SSH Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-up-key-based-ssh-login-instead-of-password-based">Setting up Key-based SSH Login Instead of Password-based</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="2ids-nids-config.html">Snort Installation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2ids-nids-config.html">NIDS Server Configuration</a></li>
 </ul>
 </li>
 </ul>
@@ -147,7 +147,7 @@
         
           <li><a href="ids.html">NIDS Setup</a> &raquo;</li>
         
-      <li>Install the core components of the NIDS Server</li>
+      <li>Install the Core Components of the NIDS Server</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -167,7 +167,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="install-the-core-components-of-the-nids-server">
-<span id="nids-install"></span><h1>Install the core components of the NIDS Server<a class="headerlink" href="#install-the-core-components-of-the-nids-server" title="Permalink to this headline">¶</a></h1>
+<span id="nids-install"></span><h1>Install the Core Components of the NIDS Server<a class="headerlink" href="#install-the-core-components-of-the-nids-server" title="Permalink to this headline">¶</a></h1>
 <p><strong>Requirements:</strong></p>
 <ul class="simple">
 <li>Freshly installed Ubuntu 16.04 LTS Server Edition</li>
@@ -187,7 +187,7 @@ To do this, log on to the server and do the following:</p>
 </pre></div>
 </div>
 <div class="section" id="changing-the-network-interfaces-names-back-to-ethx">
-<h3>Changing the network interfaces names back to ethX<a class="headerlink" href="#changing-the-network-interfaces-names-back-to-ethx" title="Permalink to this headline">¶</a></h3>
+<h3>Changing the Network Interfaces Names Back to ethX<a class="headerlink" href="#changing-the-network-interfaces-names-back-to-ethx" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This step is purely for convenience. You can skip this step if you want, but in this case don’t forget to change the interfaces names accordingly to your system.</p>
@@ -227,7 +227,7 @@ In this example <code class="docutils literal notranslate"><span class="pre">eth
 </div>
 </div>
 <div class="section" id="install-ssh-server">
-<h3>Install SSH server<a class="headerlink" href="#install-ssh-server" title="Permalink to this headline">¶</a></h3>
+<h3>Install SSH Server<a class="headerlink" href="#install-ssh-server" title="Permalink to this headline">¶</a></h3>
 <p>Install SSH server for remote access to the Snort machine:</p>
 <div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">openssh</span><span class="o">-</span><span class="n">server</span>
 </pre></div>
@@ -243,8 +243,11 @@ In this example <code class="docutils literal notranslate"><span class="pre">eth
 </div>
 </div>
 <div class="section" id="setting-up-key-based-ssh-login-instead-of-password-based">
-<h3>???? Setting up key-based SSH login instead of password-based ????<a class="headerlink" href="#setting-up-key-based-ssh-login-instead-of-password-based" title="Permalink to this headline">¶</a></h3>
-<p>Logstash needs Java version 8 at least</p>
+<h3>Setting up Key-based SSH Login Instead of Password-based<a class="headerlink" href="#setting-up-key-based-ssh-login-instead-of-password-based" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Logstash needs Java version 8 at least.</p>
+</div>
 <div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">openjdk</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">jre</span>
 </pre></div>
 </div>
@@ -278,7 +281,7 @@ In this example <code class="docutils literal notranslate"><span class="pre">eth
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="2ids-nids-config.html" class="btn btn-neutral float-right" title="Snort Installation and Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="2ids-nids-config.html" class="btn btn-neutral float-right" title="NIDS Server Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="ids.html" class="btn btn-neutral" title="NIDS Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -1,4 +1,4 @@
 .. _snort-install:
 
-Snort Installation and Configuration
-====================================
+NIDS Server Configuration
+=========================
