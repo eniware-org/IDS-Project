@@ -1,5 +1,5 @@
-Introduction
-============
+1. Introduction
+===============
 
 .. sidebar:: More information about IDS
 
@@ -7,7 +7,7 @@ Introduction
 
 .. End of sidebar
 
-What is IDS?
+1.1. What is IDS?
 -------------------------
 
 An **intrusion detection system (IDS)** monitors network traffic and monitors for suspicious activity and alerts the system or network administrator. In some cases, the IDS may also respond to anomalous or malicious traffic by taking action such as blocking the user or source IP address from accessing the network.
@@ -21,14 +21,14 @@ A typical computer network has several access points to other networks, both pub
    :alt: What is IDS?
  
 
-What Can You Do with IDS?
--------------------------
+1.2. What Can You Do with IDS?
+------------------------------
 
 Intrusion detection systems (IDS) constantly watch your network, identifying possible incidents and logging information about them, stopping the incidents, and reporting them to security administrators. In addition, some networks use IDS for identifying problems with security policies and deterring individuals from violating security policies. IDS/IPS have become a necessary addition to the security infrastructure of most organizations, precisely because they can stop attackers while they are gathering information about your network.
 
 
-How Does IDS Work?
-------------------
+1.3. How Does IDS Work?
+-----------------------
 
 The three IDS detection methodologies are typically used to detect incidents.
 
@@ -41,7 +41,7 @@ The three IDS detection methodologies are typically used to detect incidents.
 
 .. _eniware-nids:
 
-EniWARE Implementation of NIDS
+1.4. EniWARE Implementation of NIDS
 ----------------------------------------------------
 
 In this documentation is demonstrated а **network intrusion detection system (NIDS)**.
@@ -65,7 +65,7 @@ The NIDS is implementet by using **Switch 2** which is Quanta LB4M with appropri
 
 The **NIDS Server** is implemented on a virtual machine with `Ubuntu 16.04 LTS Server installation <http://releases.ubuntu.com/16.04/>`_ and it uses the following software tools:
 
-* Snort;
+* Snort & TShark;
 * idstools;
 * Logstash.
 
@@ -74,6 +74,8 @@ Snort's open source network-based intrusion detection system has the ability to 
 Snort is configured in network intrusion detection mode. In this mode, the program will monitor network traffic and analyze it against a rule set defined by the user. The program will then perform a specific action based on what has been identified.
 Snort can be downloaded from `here <https://www.snort.org/downloads>`_.
 More information can be found in the `Snort Documentation <https://www.snort.org/documents#OfficialDocumentation>`_.
+
+`TShark <https://www.wireshark.org/docs/man-pages/tshark.html>`_ is a network protocol analyzer. It lets you capture packet data from a live network, or read packets from a previously saved capture file, either printing a decoded form of those packets to the standard output or writing the packets to a file. 
 
 `idstools <https://pypi.org/project/idstools/>`_ is a Python library for working with Snort and Suricata logs and rules. Since the "native" Snort log format is ``unified2``, it is necessary to convert it to JSON. For this purpose, the ``u2json`` tool is used (a stript, which is part of the **idstools**). More information can be found in the `official documentation of the idstool project <https://idstools.readthedocs.io/en/latest/index.html>`_.
 

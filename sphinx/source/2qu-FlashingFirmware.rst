@@ -1,7 +1,7 @@
 .. _flashing-firmware:
 
-Flashing Routing Firmware
-=========================
+2.2. Flashing Routing Firmware
+==============================
 
 This is a guide to install new firmware with CLI, confirm image, switch active boot image, turn on all ports, and finally don't forget to "write memory", this will set the configuration file.
 

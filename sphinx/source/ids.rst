@@ -1,13 +1,13 @@
 .. _nids-setup:
 
-NIDS Setup
-==========
+3. NIDS Setup
+=============
 
 In this chapter it will be described how to setup :ref:`NIDS Server <network-diagram>`.
 The NIDS Server setup requires installing and configuring the following:
 
 * Ubintu 16.04 LTS Server
-* Snort
+* Snort & TShark
 * IDS Tools
 * Logstash
 * Importing the data into Elasticsearch and Kibana

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>NIDS Setup &mdash; IDS Project Documentation 1.0 documentation</title>
+  <title>3. NIDS Setup &mdash; IDS Project Documentation 1.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Install the Core Components of the NIDS Server" href="1ids-nids-install.html" />
-    <link rel="prev" title="Troubleshooting" href="4qu-Troubleshooting.html" /> 
+    <link rel="next" title="3.1. Install the Core Components of the NIDS Server" href="1ids-nids-install.html" />
+    <link rel="prev" title="2.3. Setup the Switch" href="3qu-SetupMirroring.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -83,11 +83,11 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quanta.html">Quanta LB4M Switch Setup</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">NIDS Setup</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="1ids-nids-install.html">Install the Core Components of the NIDS Server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2ids-nids-config.html">NIDS Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quanta.html">2. Quanta LB4M Switch Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. NIDS Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="1ids-nids-install.html">3.1. Install the Core Components of the NIDS Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2ids-nids-config.html">3.2. NIDS Server Configuration</a></li>
 </ul>
 </li>
 </ul>
@@ -135,7 +135,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>NIDS Setup</li>
+      <li>3. NIDS Setup</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -155,30 +155,35 @@
            <div itemprop="articleBody">
             
   <div class="section" id="nids-setup">
-<span id="id1"></span><h1>NIDS Setup<a class="headerlink" href="#nids-setup" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>3. NIDS Setup<a class="headerlink" href="#nids-setup" title="Permalink to this headline">¶</a></h1>
 <p>In this chapter it will be described how to setup <a class="reference internal" href="introduction.html#network-diagram"><span class="std std-ref">NIDS Server</span></a>.
 The NIDS Server setup requires installing and configuring the following:</p>
 <ul class="simple">
 <li>Ubintu 16.04 LTS Server</li>
-<li>Snort</li>
+<li>Snort &amp; TShark</li>
 <li>IDS Tools</li>
 <li>Logstash</li>
 <li>Importing the data into Elasticsearch and Kibana</li>
 </ul>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="1ids-nids-install.html">Install the Core Components of the NIDS Server</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="1ids-nids-install.html#ubuntu-16-04-lts-server-installation">Ubuntu 16.04 LTS Server Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="1ids-nids-install.html#install-the-core-components">Install the Core Components</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="1ids-nids-install.html">3.1. Install the Core Components of the NIDS Server</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="1ids-nids-install.html#ubuntu-16-04-lts-server-installation">3.1.2. Ubuntu 16.04 LTS Server Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1ids-nids-install.html#install-the-core-components">3.1.3. Install the Core Components</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="1ids-nids-install.html#changing-the-network-interfaces-names-back-to-ethx">Changing the Network Interfaces Names Back to ethX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="1ids-nids-install.html#setting-up-the-network-interfaces-for-snort">Setting up the Network Interfaces for Snort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="1ids-nids-install.html#install-ssh-server">Install SSH Server</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1ids-nids-install.html#setting-up-key-based-ssh-login-instead-of-password-based">Setting up Key-based SSH Login Instead of Password-based</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1ids-nids-install.html#install-logstash">Install Logstash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1ids-nids-install.html#install-snort-and-tshark">Install Snort and TShark</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="2ids-nids-config.html">NIDS Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2ids-nids-config.html">3.2. NIDS Server Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2ids-nids-config.html#logstash-configuration">3.2.1. LogStash Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2ids-nids-config.html#starting-logstash-tshark-snort">3.2.2. Starting LogStash, TShark &amp; Snort</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -191,10 +196,10 @@ The NIDS Server setup requires installing and configuring the following:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="1ids-nids-install.html" class="btn btn-neutral float-right" title="Install the Core Components of the NIDS Server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="1ids-nids-install.html" class="btn btn-neutral float-right" title="3.1. Install the Core Components of the NIDS Server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="4qu-Troubleshooting.html" class="btn btn-neutral" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="3qu-SetupMirroring.html" class="btn btn-neutral" title="2.3. Setup the Switch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -204,6 +209,7 @@ The NIDS Server setup requires installing and configuring the following:</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, EniWARE.
+      Last updated on Nov 21, 2018.
 
     </p>
   </div>
