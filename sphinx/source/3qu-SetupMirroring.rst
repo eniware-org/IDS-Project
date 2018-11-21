@@ -1,10 +1,10 @@
-Setup the Switch
-================
+2.3. Setup the Switch
+=====================
 
 .. _setup-switch-IP:
 
-Setup Network Settings
-----------------------
+2.3.1. Setup Network Settings
+------------------------------
 
 The next step is to check and setup network settings:
 
@@ -96,8 +96,8 @@ Check the network settings:
 
 .. _enablig-ssh:
 
-Enabling SSH Access
--------------------
+2.3.2. Enabling SSH Access
+---------------------------
 
 To enable the SSH access:
 
@@ -111,8 +111,8 @@ To enable the SSH access:
 
 .. _enablig-web:
 
-Enabling WEB Inteface
----------------------
+2.3.3. Enabling WEB Inteface
+-----------------------------
 
 To enable the Web interface:
 
@@ -124,8 +124,8 @@ To enable the Web interface:
     (Routing) #ip http server
 
 
-Saving Configuration Changes
-----------------------------
+2.3.4. Saving Configuration Changes
+------------------------------------
 
 .. warning:: **Write down the changes to router NVRAM.** Otherwise all changes will be lost upon switch reset! This operation may take a few minutes. Management interfaces will not be available during this time.
 
@@ -147,11 +147,11 @@ Saving Configuration Changes
 
 .. _port-mirroring:
 
-Configuring Port Mirroring
-==========================
+2.4. Configuring Port Mirroring
+===============================
 
-What is Port Mirroring?
------------------------
+2.4.1. What is Port Mirroring?
+-------------------------------
 
 The port mirroring feature allows the switch to copy the network traffic from one or several source port to a destination port. The destination port can mirror packets transmitted or
 received by the source port(-s) or both. Only one port can be set as a destination port for the mirroring, but the source port can be one or more.
@@ -159,8 +159,8 @@ received by the source port(-s) or both. Only one port can be set as a destinati
 
 .. _port-mirroring-cli:
 
-Configuring Port Mirroring via CLI
-----------------------------------
+2.4.2. Configuring Port Mirroring via CLI
+------------------------------------------
 
 Setting up a Port Mirroring Session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -264,8 +264,8 @@ Use this command for a specific port. The output shows whether the port is the m
 
 .. _port-mirroring-web:
 
-Configuring Port Mirroring via Web Interface
---------------------------------------------
+2.4.3. Configuring Port Mirroring via Web Interface
+-----------------------------------------------------
 
 .. note:: Web interface needs to be enabled - please see the section :ref:`enablig-web`
 

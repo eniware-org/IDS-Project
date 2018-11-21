@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>NIDS Server Configuration &mdash; IDS Project Documentation 1.0 documentation</title>
+  <title>3.2. NIDS Server Configuration &mdash; IDS Project Documentation 1.0 documentation</title>
   
 
   
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Install the Core Components of the NIDS Server" href="1ids-nids-install.html" /> 
+    <link rel="prev" title="3.1. Install the Core Components of the NIDS Server" href="1ids-nids-install.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -82,11 +82,15 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quanta.html">Quanta LB4M Switch Setup</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="ids.html">NIDS Setup</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="1ids-nids-install.html">Install the Core Components of the NIDS Server</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">NIDS Server Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quanta.html">2. Quanta LB4M Switch Setup</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="ids.html">3. NIDS Setup</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1ids-nids-install.html">3.1. Install the Core Components of the NIDS Server</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.2. NIDS Server Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#logstash-configuration">3.2.1. LogStash Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#starting-logstash-tshark-snort">3.2.2. Starting LogStash, TShark &amp; Snort</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -134,9 +138,9 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-          <li><a href="ids.html">NIDS Setup</a> &raquo;</li>
+          <li><a href="ids.html">3. NIDS Setup</a> &raquo;</li>
         
-      <li>NIDS Server Configuration</li>
+      <li>3.2. NIDS Server Configuration</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -156,7 +160,86 @@
            <div itemprop="articleBody">
             
   <div class="section" id="nids-server-configuration">
-<span id="snort-install"></span><h1>NIDS Server Configuration<a class="headerlink" href="#nids-server-configuration" title="Permalink to this headline">¶</a></h1>
+<span id="snort-install"></span><h1>3.2. NIDS Server Configuration<a class="headerlink" href="#nids-server-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="logstash-configuration">
+<h2>3.2.1. LogStash Configuration<a class="headerlink" href="#logstash-configuration" title="Permalink to this headline">¶</a></h2>
+<p>LogStash has a separate configuration file for each datasource it will feed into the ElasticSearch database.
+In our case, the following configuration files are used:</p>
+<ul class="simple">
+<li>snoort.conf</li>
+<li>modbus.conf</li>
+</ul>
+<p>To edit the configuration file, use a text editor, such as <strong>nano</strong> for example:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">logstash</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">snoort</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>Enter the following for the <code class="docutils literal notranslate"><span class="pre">snoort.conf</span></code> configuration file content:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span> <span class="p">{</span>
+  <span class="n">file</span> <span class="p">{</span>
+    <span class="n">path</span> <span class="o">=&gt;</span> <span class="s2">&quot;/var/log/snort/alerts.json&quot;</span>
+    <span class="n">codec</span> <span class="o">=&gt;</span> <span class="s2">&quot;json&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">output</span> <span class="p">{</span>
+  <span class="n">elasticsearch</span> <span class="p">{</span>
+    <span class="n">hosts</span> <span class="o">=&gt;</span>  <span class="s2">&quot;192.168.40.122:9200&quot;</span>
+    <span class="n">index</span> <span class="o">=&gt;</span> <span class="s2">&quot;snort_alerts&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The second configuration file to be edited  is <code class="docutils literal notranslate"><span class="pre">modbus.conf</span></code>:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">logstash</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">modbus</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>Enter the following into the <code class="docutils literal notranslate"><span class="pre">modbus.conf</span></code> content:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span> <span class="p">{</span>
+  <span class="n">file</span> <span class="p">{</span>
+    <span class="n">path</span> <span class="o">=&gt;</span> <span class="s2">&quot;/var/log/tshark/modbus.json&quot;</span>
+    <span class="n">codec</span> <span class="o">=&gt;</span> <span class="s2">&quot;json&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">output</span> <span class="p">{</span>
+  <span class="n">elasticsearch</span> <span class="p">{</span>
+    <span class="n">hosts</span> <span class="o">=&gt;</span>  <span class="s2">&quot;192.168.40.122:9200&quot;</span>
+    <span class="n">index</span> <span class="o">=&gt;</span> <span class="s2">&quot;modbus_traffic&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="starting-logstash-tshark-snort">
+<h2>3.2.2. Starting LogStash, TShark &amp; Snort<a class="headerlink" href="#starting-logstash-tshark-snort" title="Permalink to this headline">¶</a></h2>
+<p>Now start the LogStash service:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">logstart</span> <span class="n">logstart</span>
+</pre></div>
+</div>
+<p>To start the Tshark use the following command options:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">tshark</span> <span class="o">-</span><span class="n">i</span> <span class="n">eth9</span> <span class="o">-</span><span class="n">O</span> <span class="n">modbus</span> <span class="o">-</span><span class="n">Y</span> <span class="n">modbus</span> <span class="o">-</span><span class="n">T</span> <span class="n">ek</span> <span class="o">-</span><span class="n">J</span> <span class="n">modbus</span> <span class="o">-</span><span class="n">j</span> <span class="n">modbus</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">modbus</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>In this setup the network interface <code class="docutils literal notranslate"><span class="pre">eth9</span></code> is connected to a <strong>SPAN port</strong> of a switch and only the Modbus protocol of the application layer needs to be decoded.</p>
+<p>For the Modbus/TCP Layer to be decoded the command to run TShark is:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">tshark</span> <span class="o">-</span><span class="n">i</span> <span class="n">eth9</span> <span class="o">-</span><span class="n">O</span> <span class="n">modbus</span> <span class="o">-</span><span class="n">Y</span> <span class="n">modbus</span> <span class="o">-</span><span class="n">T</span> <span class="n">ek</span> <span class="o">-</span><span class="n">J</span> <span class="s2">&quot;mbtcp modbus&quot;</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">modbus</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>To start the Snort use the following command options:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">snort</span> <span class="o">-</span><span class="n">i</span> <span class="n">eth9</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">snort</span><span class="o">/</span><span class="n">snort</span><span class="o">.</span><span class="n">conf</span> <span class="o">-</span><span class="n">l</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">snort</span><span class="o">/</span> <span class="o">-</span><span class="n">h</span> <span class="mf">192.68</span><span class="o">.</span><span class="mf">50.0</span><span class="o">/</span><span class="mi">24</span> <span class="o">-</span><span class="n">A</span> <span class="n">Console</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last"><strong>Additional Snort rules for some sanity checks on the MODBUS protocol</strong> could  be downloaded from <a class="reference external" href="https://github.com/digitalbond/Quickdraw-Snort/blob/master/modbus.rules">https://github.com/digitalbond/Quickdraw-Snort/blob/master/modbus.rules</a>
+The  <code class="docutils literal notranslate"><span class="pre">modbus.rules</span></code> file should be placed in the <code class="docutils literal notranslate"><span class="pre">/etc/snort/rules/</span></code>.</p>
+</div>
+<p>To start the tool which converts Snort logs from <strong>Unified2</strong> format to <strong>JSON</strong> use the following command:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">idstools</span><span class="o">-</span><span class="n">u2json</span> <span class="o">--</span><span class="n">verbose</span> <span class="o">--</span><span class="n">snort</span><span class="o">-</span><span class="n">conf</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">snort</span><span class="o">/</span><span class="n">snort</span><span class="o">.</span><span class="n">conf</span> <span class="o">--</span><span class="n">directory</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">snort</span> \
+    <span class="o">--</span><span class="n">prefix</span> <span class="n">snort</span><span class="o">.</span><span class="n">log</span> <span class="o">--</span><span class="n">follow</span> <span class="o">--</span><span class="n">output</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">snort</span><span class="o">/</span><span class="n">alerts</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -168,7 +251,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="1ids-nids-install.html" class="btn btn-neutral" title="Install the Core Components of the NIDS Server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="1ids-nids-install.html" class="btn btn-neutral" title="3.1. Install the Core Components of the NIDS Server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -178,6 +261,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, EniWARE.
+      Last updated on Nov 21, 2018.
 
     </p>
   </div>

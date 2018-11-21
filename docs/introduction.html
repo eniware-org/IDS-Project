@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Introduction &mdash; IDS Project Documentation 1.0 documentation</title>
+  <title>1. Introduction &mdash; IDS Project Documentation 1.0 documentation</title>
   
 
   
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Quanta LB4M Switch Setup" href="quanta.html" />
+    <link rel="next" title="2. Quanta LB4M Switch Setup" href="quanta.html" />
     <link rel="prev" title="Welcome to EniWARE IDS Project Documentation" href="index.html" /> 
 
   
@@ -83,15 +83,15 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#what-is-ids">What is IDS?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#what-can-you-do-with-ids">What Can You Do with IDS?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-does-ids-work">How Does IDS Work?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#eniware-implementation-of-nids">EniWARE Implementation of NIDS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-ids">1.1. What is IDS?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-can-you-do-with-ids">1.2. What Can You Do with IDS?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-does-ids-work">1.3. How Does IDS Work?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#eniware-implementation-of-nids">1.4. EniWARE Implementation of NIDS</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="quanta.html">Quanta LB4M Switch Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ids.html">NIDS Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quanta.html">2. Quanta LB4M Switch Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ids.html">3. NIDS Setup</a></li>
 </ul>
 
             
@@ -137,7 +137,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Introduction</li>
+      <li>1. Introduction</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -157,24 +157,24 @@
            <div itemprop="articleBody">
             
   <div class="section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<h1>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <div class="sidebar">
 <p class="first sidebar-title">More information about IDS</p>
 <p class="last">For more information on IDS and how it works, see <a class="reference external" href="https://en.wikipedia.org/wiki/Intrusion_detection_system">Intrusion detection system</a>.</p>
 </div>
 <div class="section" id="what-is-ids">
-<h2>What is IDS?<a class="headerlink" href="#what-is-ids" title="Permalink to this headline">¶</a></h2>
+<h2>1.1. What is IDS?<a class="headerlink" href="#what-is-ids" title="Permalink to this headline">¶</a></h2>
 <p>An <strong>intrusion detection system (IDS)</strong> monitors network traffic and monitors for suspicious activity and alerts the system or network administrator. In some cases, the IDS may also respond to anomalous or malicious traffic by taking action such as blocking the user or source IP address from accessing the network.</p>
 <p>IDS come in a variety of “flavors” and approach the goal of detecting suspicious traffic in different ways. There are network based (NIDS) and host-based (HIDS) intrusion detection systems. There are IDS that detect based on looking for specific signatures of known threats- similar to the way antivirus software typically detects and protects against malware- and there are IDS that detect based on comparing traffic patterns against a baseline and looking for anomalies. There are IDS that simply monitor and alert and there are IDS that perform an action or actions in response to a detected threat.</p>
 <p>A typical computer network has several access points to other networks, both public and private. The challenge is maintaining the security of these networks while keeping them open to their customers. Currently, attacks are so sophisticated that they can thwart the best security systems, especially those that still operate under the assumption that networks can be secured by encryption or firewalls. Unfortunately, those technologies alone are not sufficient to counter today’s attacks.</p>
 <img alt="What is IDS?" src="_images/diagram-what-is-idp.png" />
 </div>
 <div class="section" id="what-can-you-do-with-ids">
-<h2>What Can You Do with IDS?<a class="headerlink" href="#what-can-you-do-with-ids" title="Permalink to this headline">¶</a></h2>
+<h2>1.2. What Can You Do with IDS?<a class="headerlink" href="#what-can-you-do-with-ids" title="Permalink to this headline">¶</a></h2>
 <p>Intrusion detection systems (IDS) constantly watch your network, identifying possible incidents and logging information about them, stopping the incidents, and reporting them to security administrators. In addition, some networks use IDS for identifying problems with security policies and deterring individuals from violating security policies. IDS/IPS have become a necessary addition to the security infrastructure of most organizations, precisely because they can stop attackers while they are gathering information about your network.</p>
 </div>
 <div class="section" id="how-does-ids-work">
-<h2>How Does IDS Work?<a class="headerlink" href="#how-does-ids-work" title="Permalink to this headline">¶</a></h2>
+<h2>1.3. How Does IDS Work?<a class="headerlink" href="#how-does-ids-work" title="Permalink to this headline">¶</a></h2>
 <p>The three IDS detection methodologies are typically used to detect incidents.</p>
 <ul class="simple">
 <li>Signature-Based Detection compares signatures against observed events to identify possible incidents. This is the simplest detection method because it compares only the current unit of activity (such as a packet or a log entry, to a list of signatures) using string comparison operations.</li>
@@ -183,7 +183,7 @@
 </ul>
 </div>
 <div class="section" id="eniware-implementation-of-nids">
-<span id="eniware-nids"></span><h2>EniWARE Implementation of NIDS<a class="headerlink" href="#eniware-implementation-of-nids" title="Permalink to this headline">¶</a></h2>
+<span id="eniware-nids"></span><h2>1.4. EniWARE Implementation of NIDS<a class="headerlink" href="#eniware-implementation-of-nids" title="Permalink to this headline">¶</a></h2>
 <p>In this documentation is demonstrated а <strong>network intrusion detection system (NIDS)</strong>.
 NIDS is deployed at a strategic point or points within the network, where it can monitor inbound and outbound traffic to and from all the devices on the network.
 You can selectively enforce various attack detection and prevention techniques on the network traffic passing through your chosen device. You can define policy rules to match a section of traffic based on a zone, a network, or an application, and then take active or passive preventative actions on that traffic.</p>
@@ -192,11 +192,11 @@ You can selectively enforce various attack detection and prevention techniques o
 <div class="figure" id="network-diagram">
 <img alt="EniWARE network diagram with NDIS" src="_images/network-diagram.png" />
 </div>
-<p>The NIDS is implementet by using <strong>Switch 2</strong> which is Quanta LB4M with appropriate firmware installed (see <a class="reference internal" href="2qu-FlashingFirmware.html#flashing-firmware"><span class="std std-ref">Flashing Routing Firmware</span></a>), and <strong>NIDS Server</strong>.</p>
+<p>The NIDS is implementet by using <strong>Switch 2</strong> which is Quanta LB4M with appropriate firmware installed (see <a class="reference internal" href="2qu-FlashingFirmware.html#flashing-firmware"><span class="std std-ref">2.2. Flashing Routing Firmware</span></a>), and <strong>NIDS Server</strong>.</p>
 <p><strong>Switch 2</strong> listens to the <strong>EDAM module</strong> traffic and sends it for analysis to the <strong>NIDS Server</strong>.</p>
 <p>The <strong>NIDS Server</strong> is implemented on a virtual machine with <a class="reference external" href="http://releases.ubuntu.com/16.04/">Ubuntu 16.04 LTS Server installation</a> and it uses the following software tools:</p>
 <ul class="simple">
-<li>Snort;</li>
+<li>Snort &amp; TShark;</li>
 <li>idstools;</li>
 <li>Logstash.</li>
 </ul>
@@ -205,6 +205,7 @@ Snort’s open source network-based intrusion detection system has the ability t
 Snort is configured in network intrusion detection mode. In this mode, the program will monitor network traffic and analyze it against a rule set defined by the user. The program will then perform a specific action based on what has been identified.
 Snort can be downloaded from <a class="reference external" href="https://www.snort.org/downloads">here</a>.
 More information can be found in the <a class="reference external" href="https://www.snort.org/documents#OfficialDocumentation">Snort Documentation</a>.</p>
+<p><a class="reference external" href="https://www.wireshark.org/docs/man-pages/tshark.html">TShark</a> is a network protocol analyzer. It lets you capture packet data from a live network, or read packets from a previously saved capture file, either printing a decoded form of those packets to the standard output or writing the packets to a file.</p>
 <p><a class="reference external" href="https://pypi.org/project/idstools/">idstools</a> is a Python library for working with Snort and Suricata logs and rules. Since the “native” Snort log format is <code class="docutils literal notranslate"><span class="pre">unified2</span></code>, it is necessary to convert it to JSON. For this purpose, the <code class="docutils literal notranslate"><span class="pre">u2json</span></code> tool is used (a stript, which is part of the <strong>idstools</strong>). More information can be found in the <a class="reference external" href="https://idstools.readthedocs.io/en/latest/index.html">official documentation of the idstool project</a>.</p>
 <p><a class="reference external" href="https://www.elastic.co/products/logstash">Logstash</a> is an open source tool for collecting, parsing, and storing logs (JSON files from Snort in this example) for future use. For Logstash Download, please visit <a class="reference external" href="https://www.elastic.co/downloads/logstash">download page</a>.  More information can be found in the <a class="reference external" href="https://www.elastic.co/guide/en/logstash/6.3/introduction.html">Logstash documentation</a>.</p>
 <p><a class="reference external" href="http://www.impulse-corp.co.uk/products/industrial-automation/industrial-analog-i~o/distributed-analog-i~o-modules/ethernet-to-analog-i~o-modules/edam_9017.htm">EDAM 9017 (Ethernet to Analog I/O Modules )</a> is a compact and lightweight data acquisition module which communicates via Modbus over Ethernet TCP/IP connection.</p>
@@ -223,7 +224,7 @@ More information can be found in the <a class="reference external" href="https:/
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="quanta.html" class="btn btn-neutral float-right" title="Quanta LB4M Switch Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="quanta.html" class="btn btn-neutral float-right" title="2. Quanta LB4M Switch Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="Welcome to EniWARE IDS Project Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -236,6 +237,7 @@ More information can be found in the <a class="reference external" href="https:/
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, EniWARE.
+      Last updated on Nov 21, 2018.
 
     </p>
   </div>

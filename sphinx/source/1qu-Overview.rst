@@ -1,10 +1,10 @@
-Overview
-========
+2.1. Overview
+=============
 
 .. _switch-description:
 
-Switch Description
-------------------
+2.1.1. Switch Description
+--------------------------
 
 The Quanta LB4M is a modular Gigabit Ethernet backbone switch designed for adaptability and
 scalability. The Switch can utilize up to 48 Gigabit Ethernet ports to function as a central
@@ -15,8 +15,8 @@ the daughter board. The number of 10-Giga ports depend on selecting daughter boa
 
 .. _switch-features:
 
-Features
---------
+2.1.2. Features
+----------------
 
 * Supports 48 10/100/1000BASE-T RJ45 Ethernet ports.
 * 1 built-in 1000/100/10 Ethernet ports for out of service.
@@ -59,8 +59,8 @@ Features
 * IPV6 function - Supports DHCPv6 protocol, OSPFv3 protocol, Tnneling, loopback. Provides to configure IPv6 rotuing interface, routing preference.
 
 
-Front-Panel Components
-----------------------
+2.1.3. Front-Panel Components
+------------------------------
 
 The front panel of the Switch consists of 48 1-Giga interfaces, 4 LED indicators, one built-in 1000/100/10 RJ-45 Ethernet service ports, an RS-232 communication port.
 The upper LED indicators display power situation. The lower LED indicators displays the status of the switch. Two LED indicators display the status of SFP+ interface, An RS-232 DCE console port is for setting up and managing the Switch via a connection to a console terminal or
@@ -70,24 +70,24 @@ PC using a terminal emulation program.
    :alt: Quanta front panel
 
 
-Rear Panel Description
-----------------------
+2.1.4. Rear Panel Description
+------------------------------
 The rear panel of the Switch contains an redundant AC/DC power unit and three fans.
 The redundant AC/DC power unit is a two slots for redundant, hot-swappable power supply. The norminal input voltage in the range from 100 ~ 240 VAC at 48 ~ 62 Hz. The norminal output voltage set point 12 VDC, Minimum/Maximum output current is 2 Amps ~25 Amps.
 
 .. image:: /images/LB4M_rear_panel.png
    :alt: Quanta rear panel
 
-Management Options
-------------------
+2.1.5. Management Options
+--------------------------
 
 The system may be managed by using two Service Ports through a Web Browswer, Telent, SNMP Function and using the console port on the front panel through CLI command.
 
 
 .. _switch-web-management:
 
-Web-based Management Interface
-------------------------------
+2.1.6. Web-based Management Interface
+--------------------------------------
 
 After you have successfully installed the Switch, you can configure the Switch, monitor the LED panel, and display statistics graphically using a Web browser
 
@@ -97,14 +97,14 @@ To enable the web interface, see :ref:`enablig-web`.
 
 .. _switch-cli-management:
 
-Command Line Console Interface Through the Serial Port or Telnet
-----------------------------------------------------------------
+2.1.7. Command Line Console Interface Through the Serial Port or Telnet
+-----------------------------------------------------------------------
 
 You can also connect a computer or terminal to the serial console port or use Telnet to access the Switch. The command-line-driven interface provides complete access to all switch management features.
 
 
-SNMP-Based Management
--------------------------
+2.1.8. SNMP-Based Management
+-----------------------------
 
 You can manage the Switch with an SNMP-compatible console program. The Switch supports SNMP version 1.0, version 2.0, and version 3.0. The SNMP agent decodes the incoming SNMP messages and responds to requests with MIB objects stored in the database. The SNMP agent updates the MIB objects to generate statistics. The Switch supports acomprehensive set of MIB extensions:
  

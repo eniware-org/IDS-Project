@@ -1,7 +1,7 @@
 .. _nids-install:
 
-Install the Core Components of the NIDS Server
-==============================================
+3.1. Install the Core Components of the NIDS Server
+===================================================
 
 **Requirements:**
 
@@ -12,8 +12,8 @@ Install the Core Components of the NIDS Server
 
 .. _ubuntu-install:
 
-Ubuntu 16.04 LTS Server Installation
-------------------------------------
+3.1.2. Ubuntu 16.04 LTS Server Installation
+---------------------------------------------
 
 The first step is to install `Ubuntu 16.04 LTS Server Edition <http://releases.ubuntu.com/16.04/>`_.
 The complete installation guide can be found here: `Ubuntu Server Guide <https://help.ubuntu.com/16.04/serverguide/index.html>`_.
@@ -22,8 +22,8 @@ The complete installation guide can be found here: `Ubuntu Server Guide <https:/
 
 .. _core-install:
 
-Install the Core Components
----------------------------
+3.1.3. Install the Core Components
+----------------------------------
 
 Once a server system is already installed, it can proceed to install the core components.
 To do this, log on to the server and do the following:
@@ -110,8 +110,8 @@ Install SSH server for remote access to the Snort machine:
 
 
 
-Setting up Key-based SSH Login Instead of Password-based
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install Logstash
+^^^^^^^^^^^^^^^^^^^
 
 .. note::
     Logstash needs Java version 8 at least.
@@ -145,4 +145,22 @@ After that Logstash can be isntalled:
 .. code::
 
     sudo apt-get install -y logstash
+
+
+Install Snort and TShark
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To install the latest stable version of Snort and TShark enter the following commands:
+
+
+.. code::
+
+    sudo apt-get install -y snort
+    sudo apt-get install --y tshark
+
+The next step is to create a folder to store the decoded traffic, which will be analyzed by TShark:
+
+.. code::
+
+   sudo mkdir /var/log/tshark
 
