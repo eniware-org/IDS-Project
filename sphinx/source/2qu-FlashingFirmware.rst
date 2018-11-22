@@ -7,13 +7,16 @@ This is a guide to install new firmware with CLI, confirm image, switch active b
 
 Requirements:
  - Running TFTP server;
- - Downloaded firmware for `Quanta LB4m <https://puck.nether.net/~jared/lb4m/>`_ - firmware image ``lb4m.1.1.1.8.bin`` (You can use this `direct download link <https://puck.nether.net/~jared/lb4m/lb4m.1.1.1.8.bin>`_;
+ - Downloaded firmware for `Quanta LB4m <https://puck.nether.net/~jared/lb4m/>`_ - firmware image ``lb4m.5.13.12.14.bin`` (You can use this `direct download link <https://puck.nether.net/~jared/lb4m/lb4m.5.13.12.14.bin>`_;
  - Client for serial port connection with the switch (for example `PuTTY <https://putty.org/>`_).
 
 Below it will be use an address 192.168.50.2 for access to the TFTP server. The firmware name in this example is ``firmware.bin``. Use appropriate settings for your specific case.
 
-Using PuTTY connect to the serial port (console port) of the switch using the following parameters ``115200,8,N,1``.
-Hit enter once and you should get the prompt. Use ``admin`` as a login name, the default password is blank. Hit enter again and you should get the ``(Switching)>`` prompt. Then type the command ``enable`` and the switsh will go into command mode (the password is blank again).
+The first step is to connect the Serial/COM port of the computer used for the flashing process to the Quanta LB4 Swtich console port. Use a console cable (roll over cable with RJ45-DB9 converter) for this purpose.
+
+Using PuTTY terminal emulator go to the category **Connection** and expand the **Serial** options. Enter the port number inside **"Serial line to connect to:"** text box - COM1 for example. The port number may be different in your computer. Enter the correct port number when you connect from your computer. Configure the serial line with the following values ``Speed (baud): 115200``, ``Data bits: 8``, ``Stop bits: 1``, ``Parity: none``, ``Flow control: none``. 
+
+Click **Session** and click **Serial** radio button. Verify whether you can see the port number and the baud rate (115200) you had selected before. Click **Open** to connect to Quanta LB4 Swtich. Use ``admin`` as a login name, the default password is blank. Hit enter again and you should get the ``(Switching)>`` prompt. Then type the command ``enable`` and the switsh will go into command mode (the password is blank again).
 
 
 Use the below command to copy from your tftp server:

@@ -165,14 +165,15 @@
 <dt>Requirements:</dt>
 <dd><ul class="first last simple">
 <li>Running TFTP server;</li>
-<li>Downloaded firmware for <a class="reference external" href="https://puck.nether.net/~jared/lb4m/">Quanta LB4m</a> - firmware image <code class="docutils literal notranslate"><span class="pre">lb4m.1.1.1.8.bin</span></code> (You can use this <a class="reference external" href="https://puck.nether.net/~jared/lb4m/lb4m.1.1.1.8.bin">direct download link</a>;</li>
+<li>Downloaded firmware for <a class="reference external" href="https://puck.nether.net/~jared/lb4m/">Quanta LB4m</a> - firmware image <code class="docutils literal notranslate"><span class="pre">lb4m.5.13.12.14.bin</span></code> (You can use this <a class="reference external" href="https://puck.nether.net/~jared/lb4m/lb4m.5.13.12.14.bin">direct download link</a>;</li>
 <li>Client for serial port connection with the switch (for example <a class="reference external" href="https://putty.org/">PuTTY</a>).</li>
 </ul>
 </dd>
 </dl>
 <p>Below it will be use an address 192.168.50.2 for access to the TFTP server. The firmware name in this example is <code class="docutils literal notranslate"><span class="pre">firmware.bin</span></code>. Use appropriate settings for your specific case.</p>
-<p>Using PuTTY connect to the serial port (console port) of the switch using the following parameters <code class="docutils literal notranslate"><span class="pre">115200,8,N,1</span></code>.
-Hit enter once and you should get the prompt. Use <code class="docutils literal notranslate"><span class="pre">admin</span></code> as a login name, the default password is blank. Hit enter again and you should get the <code class="docutils literal notranslate"><span class="pre">(Switching)&gt;</span></code> prompt. Then type the command <code class="docutils literal notranslate"><span class="pre">enable</span></code> and the switsh will go into command mode (the password is blank again).</p>
+<p>The first step is to connect the Serial/COM port of the computer used for the flashing process to the Quanta LB4 Swtich console port. Use a console cable (roll over cable with RJ45-DB9 converter) for this purpose.</p>
+<p>Using PuTTY terminal emulator go to the category <strong>Connection</strong> and expand the <strong>Serial</strong> options. Enter the port number inside <strong>“Serial line to connect to:”</strong> text box - COM1 for example. The port number may be different in your computer. Enter the correct port number when you connect from your computer. Configure the serial line with the following values <code class="docutils literal notranslate"><span class="pre">Speed</span> <span class="pre">(baud):</span> <span class="pre">115200</span></code>, <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">bits:</span> <span class="pre">8</span></code>, <code class="docutils literal notranslate"><span class="pre">Stop</span> <span class="pre">bits:</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">Parity:</span> <span class="pre">none</span></code>, <code class="docutils literal notranslate"><span class="pre">Flow</span> <span class="pre">control:</span> <span class="pre">none</span></code>.</p>
+<p>Click <strong>Session</strong> and click <strong>Serial</strong> radio button. Verify whether you can see the port number and the baud rate (115200) you had selected before. Click <strong>Open</strong> to connect to Quanta LB4 Swtich. Use <code class="docutils literal notranslate"><span class="pre">admin</span></code> as a login name, the default password is blank. Hit enter again and you should get the <code class="docutils literal notranslate"><span class="pre">(Switching)&gt;</span></code> prompt. Then type the command <code class="docutils literal notranslate"><span class="pre">enable</span></code> and the switsh will go into command mode (the password is blank again).</p>
 <p>Use the below command to copy from your tftp server:</p>
 <div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>(Switching) #copy tftp://192.168.50.2/firmware.bin image2
 
@@ -362,7 +363,7 @@ Applying Interface configuration, please wait ...
   <div role="contentinfo">
     <p>
         &copy; Copyright 2018, EniWARE.
-      Last updated on Nov 21, 2018.
+      Last updated on Nov 22, 2018.
 
     </p>
   </div>
